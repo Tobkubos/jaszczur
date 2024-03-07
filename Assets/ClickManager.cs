@@ -24,12 +24,25 @@ public class ClickManager : MonoBehaviour
     float normalizedTime;
 
     public GameObject MAINCLICKOBJECT;
-    public GameObject CLICK_UPGRADES;
-    public GameObject IDLE_UPGRADES;
+    public GameObject UPGRADES_MENU;
+
+    public GameObject CLICK_UPGRADES_LIST;
+    public GameObject IDLE_UPGRADES_LIST;
+
+    public bool CLICKED = false;
+    public bool CanCLick = true;
+
+    Vector3 startPos;
+    float endPos;
+    public RectTransform Canva;
 
     private void Start()
     {
         StartCoroutine(IdleGain());
+        Debug.Log(UPGRADES_MENU.transform.position);
+        Debug.Log(UPGRADES_MENU.transform.localPosition);
+
+        UPGRADES_MENU.transform.localPosition = new Vector3(0,-Canva.rect.height+100,0);
     }
     private void FixedUpdate()
     {
@@ -64,7 +77,10 @@ public class ClickManager : MonoBehaviour
         if (DynMul == true && dynamicMultiplierCooldown > Time.time)
         {
             dynamicMultiplier += 0.1f;
-            dynamicMultiplierCooldown += 0.25f;
+            if(dynamicMultiplierCooldown < Time.time + 3) 
+            {
+                dynamicMultiplierCooldown += 0.25f;
+            }
             if (dynamicMultiplier > 2f) 
             {
                 dynamicMultiplier = 2f;
@@ -112,8 +128,42 @@ public class ClickManager : MonoBehaviour
     }
 
 
+    public void ShowUpgrades()
+    {
+        if (CanCLick == true)
+        {
+            CanCLick = false;
+
+            if (CLICKED == false)
+            {
+                CLICKED = true;
+                StartCoroutine(Cooldown());
+                LeanTween.moveLocalY(UPGRADES_MENU, -Canva.rect.height/3 - 100f, 0.5f);
+            }
+            else if (CLICKED == true)
+            {
+                CLICKED = false;
+                LeanTween.moveLocalY(UPGRADES_MENU, -Canva.rect.height + 100, 0.5f);
+                StartCoroutine(Cooldown());
+            }
+        }
+    }
+
+    IEnumerator Cooldown()
+    {
+        yield return new WaitForSeconds(0.5f);
+        CanCLick = true;
+    }
+
     public void ShowClickUpgrades()
     {
-
+        CLICK_UPGRADES_LIST.SetActive(true);
+        IDLE_UPGRADES_LIST.SetActive(false);
     }
+    public void ShowIdleUpgrades()
+    {
+        IDLE_UPGRADES_LIST.SetActive(true);
+        CLICK_UPGRADES_LIST.SetActive(false);
+    }
+
 }
