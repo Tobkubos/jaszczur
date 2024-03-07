@@ -39,10 +39,7 @@ public class ClickManager : MonoBehaviour
     private void Start()
     {
         StartCoroutine(IdleGain());
-        Debug.Log(UPGRADES_MENU.transform.position);
-        Debug.Log(UPGRADES_MENU.transform.localPosition);
-
-        UPGRADES_MENU.transform.localPosition = new Vector3(0,-Canva.rect.height+100,0);
+        UPGRADES_MENU.transform.localPosition = new Vector3(0,-Canva.rect.height+200,0);
     }
     private void FixedUpdate()
     {
@@ -113,11 +110,6 @@ public class ClickManager : MonoBehaviour
 
     }
 
-    public void ClickPerSec()
-    {
-        CashPerSsec += 1f;
-    }
-
     public IEnumerator IdleGain()
     {
         while (true)
@@ -138,12 +130,12 @@ public class ClickManager : MonoBehaviour
             {
                 CLICKED = true;
                 StartCoroutine(Cooldown());
-                LeanTween.moveLocalY(UPGRADES_MENU, -Canva.rect.height/3 - 100f, 0.5f);
+                LeanTween.moveLocalY(UPGRADES_MENU, -Canva.rect.height/3 - 200f, 0.5f);
             }
             else if (CLICKED == true)
             {
                 CLICKED = false;
-                LeanTween.moveLocalY(UPGRADES_MENU, -Canva.rect.height + 100, 0.5f);
+                LeanTween.moveLocalY(UPGRADES_MENU, -Canva.rect.height + 200, 0.5f);
                 StartCoroutine(Cooldown());
             }
         }
@@ -165,5 +157,4 @@ public class ClickManager : MonoBehaviour
         IDLE_UPGRADES_LIST.SetActive(true);
         CLICK_UPGRADES_LIST.SetActive(false);
     }
-
 }
