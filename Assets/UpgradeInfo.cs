@@ -13,9 +13,10 @@ public class UpgradeInfo : MonoBehaviour
     public float priceChange = 1.01f;
     public float bonus=0;
 	public float bonusChange = 1f;
-    private int[] tab = new int[5];
+    public int lvl = 0;
+    
+	private int[] tab = new int[5];
     private int i = 0;
-    private int lvl = 0;
 
     public GameObject buyButton;
     public TextMeshProUGUI buyCount;
@@ -184,8 +185,18 @@ public class UpgradeInfo : MonoBehaviour
 			massUpgrade(checkPrice(price, priceChange, 100), 100);
 		}
 
-		Manager.CashPerSsec = bonus;
-		
+		//
+		///      zrob skrypt z tablica wszystkich upgrade czyt. wynikow ktore trzeba dodac
+		////     dodaj sume do odpowiedniej stat. 
+		/////	 tutaj dodawaj to odpowiedniej komórki w tablicy, dodaj na gorze jaki to upgrade
+		//////
+		Manager.click = bonus;
+		//////
+		/////
+		////
+		///
+		//
+
 		priceText.text = "Cost: " + NumberConverter.FormatNumber(price);
 		levelText.text = "lvl: " + lvl.ToString();
 		bonusText.text = "+ " + bonus + " " + UpgradeBonus;
