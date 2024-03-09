@@ -371,6 +371,7 @@ GameObject:
   - component: {fileID: 1068068003003655476}
   - component: {fileID: 7689633137235469455}
   - component: {fileID: 569604274722628789}
+  - component: {fileID: 2151269427512003168}
   m_Layer: 5
   m_Name: upgrade
   m_TagString: Untagged
@@ -426,7 +427,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.6593296, g: 0.9622642, b: 0.24873616, a: 1}
+  m_Color: {r: 0.8901961, g: 0.8352941, b: 0.7921569, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -456,12 +457,41 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   price: 10
+  priceChange: 1.1
   bonus: 0
+  bonusChange: 1
   buyButton: {fileID: 6957562846888007794}
   buyCount: {fileID: 6461200188654887622}
   levelText: {fileID: 3750957722686009511}
   priceText: {fileID: 8677434677417654396}
   bonusText: {fileID: 1776435976962989301}
+  NAME: {fileID: 8189629444418303130}
+  BONUS: {fileID: 1776435976962989301}
+  stars:
+  - {fileID: 6895894948342927430}
+  - {fileID: 1946420454147256384}
+  - {fileID: 1833313104040089174}
+  - {fileID: 1530427213389484550}
+  - {fileID: 870053690479448659}
+  - {fileID: 1122438177090957522}
+  - {fileID: 4393191390699804706}
+  - {fileID: 7611347262012121945}
+  - {fileID: 9124869316722005438}
+  - {fileID: 5656640011223291894}
+  UpgradeName: null
+  UpgradeBonus: null
+--- !u!114 &2151269427512003168
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1726490463819273864}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 121c93d0a23617944bac348b222f4637, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1833313104040089174
 GameObject:
   m_ObjectHideFlags: 0
@@ -646,8 +676,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.00066853, y: 0}
-  m_SizeDelta: {x: 147.81, y: 50}
+  m_AnchoredPosition: {x: -0.0000040531, y: -0.0000000034925}
+  m_SizeDelta: {x: 103.6392, y: 137.47}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2129451687451864379
 CanvasRenderer:
@@ -704,7 +734,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 44.75
+  m_fontSize: 50.9
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -863,10 +893,10 @@ RectTransform:
   - {fileID: 7524408958284852998}
   m_Father: {fileID: 8448963097532721046}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 1, y: 0.5}
-  m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: -714.23, y: -85}
-  m_SizeDelta: {x: 547.69, y: 39.805}
+  m_AnchorMin: {x: 0, y: 0.5}
+  m_AnchorMax: {x: 0, y: 0.5}
+  m_AnchoredPosition: {x: 235.86859, y: -85}
+  m_SizeDelta: {x: 447.8871, y: 39.805}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &5003350175420235358
 MonoBehaviour:
@@ -1003,8 +1033,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.00066853, y: 0}
-  m_SizeDelta: {x: 147.81, y: 50}
+  m_AnchoredPosition: {x: 0.00088882, y: -0.00000095367}
+  m_SizeDelta: {x: 292.51, y: 87.534}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5532395464198363565
 CanvasRenderer:
@@ -1061,7 +1091,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 44.75
+  m_fontSize: 72
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -1719,7 +1749,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 569604274722628789}
         m_TargetAssemblyTypeName: UpgradeInfo, Assembly-CSharp
-        m_MethodName: buy1time
+        m_MethodName: buyUpgrade
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

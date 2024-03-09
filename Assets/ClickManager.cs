@@ -8,47 +8,45 @@ using UnityEngine.UI;
 
 public class ClickManager : MonoBehaviour
 {
-    public float click = 1;
-    public float Cash = 0;
-    public float CashPerSsec = 0;
-    public float dynamicMultiplier = 1;
-    public float dynamicMultiplierCooldown = 0;
+	private NumberConverter NumberConverter;
+
+	public GameObject MAINCLICKOBJECT;
+    public GameObject UPGRADES_MENU;
+    public GameObject CLICK_UPGRADES_LIST;
+    public GameObject IDLE_UPGRADES_LIST;
+    public RectTransform Canva;
 
     public TextMeshProUGUI TotalCash;
     public TextMeshProUGUI CashPS;
     public TextMeshProUGUI CashPerClick;
-
     public TextMeshProUGUI DynamicM;
     public Slider DynamicMSlider;
+
+    public float click = 1;
+    public float Cash = 0;
+    public float CashPerSsec = 0;
+    
+    public float dynamicMultiplier = 1;
+    public float dynamicMultiplierCooldown = 0;
     public bool DynMul = false;
     float normalizedTime;
-
-    public GameObject MAINCLICKOBJECT;
-    public GameObject UPGRADES_MENU;
-
-    public GameObject CLICK_UPGRADES_LIST;
-    public GameObject IDLE_UPGRADES_LIST;
 
     public bool CLICKED = false;
     public bool CanCLick = true;
 
-    Vector3 startPos;
-    float endPos;
-    public RectTransform Canva;
-
     private void Start()
     {
         StartCoroutine(IdleGain());
+        NumberConverter = GetComponent<NumberConverter>();
         UPGRADES_MENU.transform.localPosition = new Vector3(0,-Canva.rect.height+200,0);
     }
     private void FixedUpdate()
     {
-        string temp = Cash.ToString("F2");
-        TotalCash.text = temp;
-        CashPS.text = "+" + CashPerSsec.ToString() + "/s";
-        CashPerClick.text = "+" + click.ToString() + " per click";
+        TotalCash.text = NumberConverter.FormatNumber(Cash);
+        CashPS.text = "+" + CashPerSsec.ToString("F0") + "/s";
+        CashPerClick.text = "+" + click.ToString("F0") + " per click";
 
-        DynamicM.text = "x" + dynamicMultiplier.ToString();
+        DynamicM.text = "x" + NumberConverter.FormatNumber(dynamicMultiplier);
 
         if(dynamicMultiplierCooldown < Time.time)
         {
@@ -73,7 +71,7 @@ public class ClickManager : MonoBehaviour
 
         if (DynMul == true && dynamicMultiplierCooldown > Time.time)
         {
-            dynamicMultiplier += 0.1f;
+            dynamicMultiplier += 0.01f;
             if(dynamicMultiplierCooldown < Time.time + 3) 
             {
                 dynamicMultiplierCooldown += 0.25f;
@@ -114,8 +112,8 @@ public class ClickManager : MonoBehaviour
     {
         while (true)
         {
-            yield return new WaitForSeconds(0.1f);
-            Cash += CashPerSsec / 10f;
+            yield return new WaitForSeconds(0.05f);
+            Cash += CashPerSsec / 20f;
         }
     }
 
@@ -130,12 +128,12 @@ public class ClickManager : MonoBehaviour
             {
                 CLICKED = true;
                 StartCoroutine(Cooldown());
-                LeanTween.moveLocalY(UPGRADES_MENU, -Canva.rect.height/3 - 200f, 0.5f);
+                LeanTween.moveLocalY(UPGRADES_MENU, -Canva.rect.height/3 - 200f, 0.5f).setEase(LeanTweenType.easeInOutSine);
             }
             else if (CLICKED == true)
             {
                 CLICKED = false;
-                LeanTween.moveLocalY(UPGRADES_MENU, -Canva.rect.height + 200, 0.5f);
+                LeanTween.moveLocalY(UPGRADES_MENU, -Canva.rect.height + 200, 0.5f).setEase(LeanTweenType.easeInOutSine);
                 StartCoroutine(Cooldown());
             }
         }
