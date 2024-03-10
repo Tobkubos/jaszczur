@@ -8,18 +8,20 @@ using UnityEngine.UI;
 
 public class UpgradeInfo : MonoBehaviour
 {
-
+	/// <summary>
+	/// 
+	/// WSZYSTKO O UPGRADE
+	/// 
+	/// </summary>
+	[Header("DATA")]
 	public int index;
-
+    public int lvl = 0;
+    public float bonus=0;
 	public float price=0;
     public float priceChange = 1.01f;
-    public float bonus=0;
 	public float bonusChange = 1f;
-    public int lvl = 0;
-    
-	private int[] tab = new int[5];
-    private int i = 0;
 
+    [Header("SCENE")]
     public GameObject buyButton;
     public TextMeshProUGUI buyCount;
     public TextMeshProUGUI levelText;
@@ -29,25 +31,36 @@ public class UpgradeInfo : MonoBehaviour
     public TextMeshProUGUI BONUS;
 	public GameObject[] stars;
 
+    [Header("TEXT")]
     public string UpgradeName;
     public string UpgradeBonus;
 
-	public bool clickUpgrade;
+    [Header("TYPE OF UPGRADE")]
+    public bool clickUpgrade;
 	public bool idleUpgrade;
 
+    [Header("OTHER")]
     private NumberConverter NumberConverter;
     private ClickManager Manager;
-	private UpgradeStorage Storage;
+	private GameSAVER Storage;
+    ///
+    private int[] tab = new int[5];
+    private int i = 0;
+    ///
     private void Start()
     {
         NumberConverter = GetComponent<NumberConverter>();
         Manager = GameObject.Find("GameManager").GetComponent<ClickManager>();
-		Storage = GameObject.Find("GameManager").GetComponent<UpgradeStorage>();
+		Storage = GameObject.Find("GameManager").GetComponent<GameSAVER>();
+
+
+
 		//Start config text/price/bonus
 		NAME.text = UpgradeName;
         priceText.text = "Cost: " + NumberConverter.FormatNumber(price);
         levelText.text = "lvl: " + lvl.ToString();
         bonusText.text = "+ "+bonus+" "+UpgradeBonus;
+		CheckStars();
 
 		tab[0] = 1;
 		tab[1] = 10;
@@ -57,7 +70,11 @@ public class UpgradeInfo : MonoBehaviour
 	}
     private void Update()
     {
-		if (i != null)
+        priceText.text = "Cost: " + NumberConverter.FormatNumber(price);
+        levelText.text = "lvl: " + lvl.ToString();
+        bonusText.text = "+ " + bonus + " " + UpgradeBonus;
+
+        if (i != null)
 		{
 			//1 UPGRADE
 			if (i == 0)
@@ -192,25 +209,6 @@ public class UpgradeInfo : MonoBehaviour
 			massUpgrade(checkPrice(price, priceChange, 100), 100);
 		}
 
-		//
-		///      zrob skrypt z tablica wszystkich upgrade czyt. wynikow ktore trzeba dodac
-		////     dodaj sume do odpowiedniej stat. 
-		/////	 tutaj dodawaj to odpowiedniej komórki w tablicy, dodaj na gorze jaki to upgrade
-		//////
-		if (clickUpgrade)
-		{
-			Storage.ClickUpradeStorage[index] = bonus;
-		}
-
-		if (idleUpgrade)
-		{
-			bonus = Storage.IdleUpgradeStorage[index];
-		}
-		//////
-		/////
-		////
-		///
-		//
 
 		priceText.text = "Cost: " + NumberConverter.FormatNumber(price);
 		levelText.text = "lvl: " + lvl.ToString();

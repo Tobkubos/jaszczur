@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class UpgradeManager : MonoBehaviour
 {
+	/// <summary>
+	/// 
+	/// WYSWIETLANIE CZY JEST DOESEPNY DANY UPGRADE
+	/// 
+	/// </summary>
 	public GameObject[] ClickUpgrades;
 
 	private void Start()
