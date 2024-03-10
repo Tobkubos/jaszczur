@@ -8,8 +8,10 @@ using UnityEngine.UI;
 
 public class UpgradeInfo : MonoBehaviour
 {
-    private NumberConverter NumberConverter;
-    public float price=0;
+
+	public int index;
+
+	public float price=0;
     public float priceChange = 1.01f;
     public float bonus=0;
 	public float bonusChange = 1f;
@@ -30,14 +32,19 @@ public class UpgradeInfo : MonoBehaviour
     public string UpgradeName;
     public string UpgradeBonus;
 
+	public bool clickUpgrade;
+	public bool idleUpgrade;
+
+    private NumberConverter NumberConverter;
     private ClickManager Manager;
+	private UpgradeStorage Storage;
     private void Start()
     {
         NumberConverter = GetComponent<NumberConverter>();
         Manager = GameObject.Find("GameManager").GetComponent<ClickManager>();
-
-        //Start config text/price/bonus
-        NAME.text = UpgradeName;
+		Storage = GameObject.Find("GameManager").GetComponent<UpgradeStorage>();
+		//Start config text/price/bonus
+		NAME.text = UpgradeName;
         priceText.text = "Cost: " + NumberConverter.FormatNumber(price);
         levelText.text = "lvl: " + lvl.ToString();
         bonusText.text = "+ "+bonus+" "+UpgradeBonus;
@@ -190,7 +197,15 @@ public class UpgradeInfo : MonoBehaviour
 		////     dodaj sume do odpowiedniej stat. 
 		/////	 tutaj dodawaj to odpowiedniej komórki w tablicy, dodaj na gorze jaki to upgrade
 		//////
-		Manager.click = bonus;
+		if (clickUpgrade)
+		{
+			Storage.ClickUpradeStorage[index] = bonus;
+		}
+
+		if (idleUpgrade)
+		{
+			bonus = Storage.IdleUpgradeStorage[index];
+		}
 		//////
 		/////
 		////

@@ -22,6 +22,8 @@ public class ClickManager : MonoBehaviour
     public TextMeshProUGUI DynamicM;
     public Slider DynamicMSlider;
 
+
+
     public float click = 1;
     public float Cash = 0;
     public float CashPerSsec = 0;
