@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data.Common;
 using System.Runtime.InteropServices;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -20,14 +21,18 @@ public class ClickManager : MonoBehaviour
     public TextMeshProUGUI CashPS;
     public TextMeshProUGUI CashPerClick;
     public TextMeshProUGUI DynamicM;
+    public TextMeshProUGUI DiamondsText;
     public Slider DynamicMSlider;
 
-
+    public ParticleSystem ClickParticleSystem;
 
     public float click = 1;
     public float Cash = 0;
     public float CashPerSsec = 0;
-    
+
+    public int diamonds = 0;
+    public int diamondsChance = 1;
+
     public float dynamicMultiplier = 1;
     public float dynamicMultiplierCooldown = 0;
     public bool DynMul = false;
@@ -84,7 +89,15 @@ public class ClickManager : MonoBehaviour
             }
         }
 
+
         Cash += click * dynamicMultiplier;
+        int tempDiamond = Random.Range(0, 100);
+        if(tempDiamond <= diamondsChance)
+        {
+            diamonds += 1;
+            DiamondsText.text = diamonds.ToString();
+        }
+        
         MAINCLICKOBJECT.transform.localScale = new Vector3(1, 1, 1);
         LeanTween.scale(MAINCLICKOBJECT, new Vector3(1.1f, 1.1f, 1.1f), 0.05f);
         LeanTween.scale(MAINCLICKOBJECT, new Vector3(1f, 1f, 1f), 0.05f).setDelay(0.05f);

@@ -27,8 +27,8 @@ public class UpgradeInfo : MonoBehaviour
     public TextMeshProUGUI levelText;
     public TextMeshProUGUI priceText;
     public TextMeshProUGUI bonusText;
+    public TextMeshProUGUI TotalbonusText;
     public TextMeshProUGUI NAME;
-    public TextMeshProUGUI BONUS;
 	public GameObject[] stars;
 
     [Header("TEXT")]
@@ -55,7 +55,8 @@ public class UpgradeInfo : MonoBehaviour
 		NAME.text = UpgradeName;
         priceText.text = "Cost: " + NumberConverter.FormatNumber(price);
         levelText.text = "lvl: " + lvl.ToString();
-        bonusText.text = "+ "+bonus+" "+UpgradeBonus;
+        bonusText.text = "+ "+bonusChange+" "+UpgradeBonus;
+		TotalbonusText.text = bonus + " " + UpgradeBonus; 
 		CheckStars();
 
 		tab[0] = 1;
@@ -68,7 +69,8 @@ public class UpgradeInfo : MonoBehaviour
     {
         priceText.text = "Cost: " + NumberConverter.FormatNumber(price);
         levelText.text = "lvl: " + lvl.ToString();
-        bonusText.text = "+ " + bonus + " " + UpgradeBonus;
+        bonusText.text = "+ " + bonusChange + " " + UpgradeBonus;
+        TotalbonusText.text = bonus + " " + UpgradeBonus;
 
         if (i != null)
 		{
@@ -208,8 +210,9 @@ public class UpgradeInfo : MonoBehaviour
 
 		priceText.text = "Cost: " + NumberConverter.FormatNumber(price);
 		levelText.text = "lvl: " + lvl.ToString();
-		bonusText.text = "+ " + bonus + " " + UpgradeBonus;
-	}
+		bonusText.text = "+ " + bonusChange + " " + UpgradeBonus;
+        TotalbonusText.text = bonus + " " + UpgradeBonus;
+    }
 
 	private float checkPrice(float price, float change ,int numb)
     {
