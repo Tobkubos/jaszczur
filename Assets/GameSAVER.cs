@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
@@ -7,11 +8,17 @@ using UnityEngine.UIElements;
 
 public class GameSAVER : MonoBehaviour
 {
-    private int lvl;
-    private float price;
-    private float bonus;
 
     public GameObject[] ClickUpgrades;
+
+    string[,] CU ={ { "CU_1_Level", "CU_1_Price", "CU_1_Bonus" }
+    };  // Indeks 0
+    public void KeyReset()
+    {
+        PlayerPrefs.DeleteAll();
+        LoadData();
+        UnityEngine.Debug.Log("USUWAM");
+    }
 
     void OnApplicationPause(bool pauseStatus)
     {
@@ -28,18 +35,20 @@ public class GameSAVER : MonoBehaviour
     void SaveData()
     {
         UpgradeInfo temp = ClickUpgrades[0].GetComponent<UpgradeInfo>();
-        PlayerPrefs.SetInt(temp.lvl.ToString(), lvl);
-        PlayerPrefs.SetFloat(temp.bonus.ToString(), price);
-        PlayerPrefs.SetFloat(temp.price.ToString(), bonus);
-        PlayerPrefs.Save();
+        PlayerPrefs.SetInt(CU[0,0], temp.lvl);
+        PlayerPrefs.SetFloat(CU[0,1], temp.price);
+        PlayerPrefs.SetFloat(CU[0,2], temp.bonus);
+
+        UnityEngine.Debug.Log(temp.lvl + " " + temp.price + " " + temp.bonus);
     }
 
-    void LoadData()
+    public void LoadData()
     {
         UpgradeInfo temp = ClickUpgrades[0].GetComponent<UpgradeInfo>();
-        temp.lvl = PlayerPrefs.GetInt(temp.lvl.ToString(), 1);
-        temp.price = PlayerPrefs.GetFloat(temp.bonus.ToString(), 2);
-        temp.bonus = PlayerPrefs.GetFloat(temp.price.ToString(), 1);
+        temp.lvl = PlayerPrefs.GetInt(CU[0,0], 1);
+        temp.price = PlayerPrefs.GetFloat(CU[0,1], 2);
+        temp.bonus = PlayerPrefs.GetFloat(CU[0,2], 1);
+        UnityEngine.Debug.Log(temp.lvl +" "+ temp.price +" "+ temp.bonus);
     }
 
     void Start()

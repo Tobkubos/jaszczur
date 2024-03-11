@@ -15,9 +15,9 @@ public class UpgradeInfo : MonoBehaviour
 	/// </summary>
 	[Header("DATA")]
 	public int index;
-    public int lvl = 0;
-    public float bonus=0;
-	public float price=0;
+    public int lvl;
+    public float bonus;
+	public float price;
     public float priceChange = 1.01f;
 	public float bonusChange = 1f;
 
@@ -42,18 +42,14 @@ public class UpgradeInfo : MonoBehaviour
     [Header("OTHER")]
     private NumberConverter NumberConverter;
     private ClickManager Manager;
-	private GameSAVER Storage;
     ///
     private int[] tab = new int[5];
     private int i = 0;
-    ///
+
     private void Start()
     {
         NumberConverter = GetComponent<NumberConverter>();
         Manager = GameObject.Find("GameManager").GetComponent<ClickManager>();
-		Storage = GameObject.Find("GameManager").GetComponent<GameSAVER>();
-
-
 
 		//Start config text/price/bonus
 		NAME.text = UpgradeName;
@@ -229,7 +225,7 @@ public class UpgradeInfo : MonoBehaviour
 			int index = lvl / 10 - 1;
 			if (index >= 0 && index < stars.Length)
 			{
-				stars[index].gameObject.GetComponent<Image>().color = Color.yellow;
+				stars[i].gameObject.GetComponent<Image>().color = Color.yellow;
 			}
 		}
 

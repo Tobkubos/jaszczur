@@ -15,7 +15,7 @@ public class UpgradeManager : MonoBehaviour
 	{
 		for(int i = 0; i< ClickUpgrades.Length; i++)
 		{
-			ClickUpgrades[i].SetActive(false);
+			ClickUpgrades[i].SetActive(true);
 		}
 		ClickUpgrades[0].SetActive(true);
 	}
