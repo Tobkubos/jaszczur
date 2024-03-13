@@ -13,8 +13,11 @@ public class UpgradeInfo : MonoBehaviour
 	/// WSZYSTKO O UPGRADE
 	/// 
 	/// </summary>
+
+	[Header("START DATA")]
+	public float start_price;
+
 	[Header("DATA")]
-	public int index;
     public int lvl;
     public float bonus;
 	public float price;
@@ -38,11 +41,14 @@ public class UpgradeInfo : MonoBehaviour
     [Header("TYPE OF UPGRADE")]
     public bool clickUpgrade;
 	public bool idleUpgrade;
+	public bool MultiplierUpgrade;
 
     [Header("OTHER")]
     private NumberConverter NumberConverter;
     private ClickManager Manager;
-    ///
+	private UpgradeManager UpgradeManager;
+
+	[Header("BUY STAGES")]
     private int[] tab = new int[5];
     private int i = 0;
 
@@ -50,6 +56,7 @@ public class UpgradeInfo : MonoBehaviour
     {
         NumberConverter = GetComponent<NumberConverter>();
         Manager = GameObject.Find("GameManager").GetComponent<ClickManager>();
+		UpgradeManager = GameObject.Find("GameManager").GetComponent<UpgradeManager>();
 
 		//Start config text/price/bonus
 		NAME.text = UpgradeName;
@@ -176,6 +183,7 @@ public class UpgradeInfo : MonoBehaviour
 				price *= priceChange;
 				lvl += 1;
 				CheckStars();
+				UpgradeManager.FUNCTION_TotalCashPerClick();
 			}
 		}
 	}
@@ -228,7 +236,7 @@ public class UpgradeInfo : MonoBehaviour
 			int index = lvl / 10 - 1;
 			if (index >= 0 && index < stars.Length)
 			{
-				stars[i].gameObject.GetComponent<Image>().color = Color.yellow;
+				stars[index].gameObject.GetComponent<Image>().color = Color.yellow;
 			}
 		}
 

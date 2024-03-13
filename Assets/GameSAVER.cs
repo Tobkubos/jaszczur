@@ -8,8 +8,8 @@ using UnityEngine.UIElements;
 
 public class GameSAVER : MonoBehaviour
 {
-
     public GameObject[] ClickUpgrades;
+    public ClickManager ClickManager;
 
     string[,] CU ={ { "CU_1_Level", "CU_1_Price", "CU_1_Bonus" },
                     { "CU_2_Level", "CU_2_Price", "CU_2_Bonus" },
@@ -31,11 +31,21 @@ public class GameSAVER : MonoBehaviour
                     { "IU_8_Level", "IU_8_Price", "IU_8_Bonus" },
     };
 
-    string[] MainSTATS = { "CashPerClick", "CashPerSecond", "IU_1_Bonus" };
+    string[] MainSTATS = { "CashPerClick", "CashPerSecond", "TotalCash", "Diamonds" };
+
+    void Start()
+    {
+        LoadData();
+    }
+    private void Update()
+    {
+        
+    }
     public void KeyReset()
     {
         PlayerPrefs.DeleteAll();
         LoadData();
+        this.gameObject.GetComponent<UpgradeManager>().ShowUpgradesPerLevel();
     }
 
     void OnApplicationPause(bool pauseStatus)
@@ -52,6 +62,11 @@ public class GameSAVER : MonoBehaviour
 
     void SaveData()
     {
+        PlayerPrefs.SetFloat(MainSTATS[0], ClickManager.click);
+        PlayerPrefs.SetFloat(MainSTATS[1], ClickManager.CashPerSsec);
+        PlayerPrefs.SetFloat(MainSTATS[2], ClickManager.Cash);
+        PlayerPrefs.SetInt(MainSTATS[3], ClickManager.diamonds);
+
         for (int i = 0; i < ClickUpgrades.Length; i++)
         {
             UpgradeInfo temp = ClickUpgrades[i].GetComponent<UpgradeInfo>();
@@ -65,18 +80,19 @@ public class GameSAVER : MonoBehaviour
 
     public void LoadData()
     {
+        ClickManager.click = PlayerPrefs.GetFloat(MainSTATS[0], 1);
+        ClickManager.CashPerSsec = PlayerPrefs.GetFloat(MainSTATS[1], 0);
+        ClickManager.Cash = PlayerPrefs.GetFloat(MainSTATS[2], 0);
+
+
         for (int i = 0; i < ClickUpgrades.Length; i++)
         {
             UpgradeInfo temp = ClickUpgrades[i].GetComponent<UpgradeInfo>();
             temp.lvl = PlayerPrefs.GetInt(CU[i, 0], 1);
-            temp.price = PlayerPrefs.GetFloat(CU[i, 1], 2);
+            temp.price = PlayerPrefs.GetFloat(CU[i, 1], temp.start_price);
             temp.bonus = PlayerPrefs.GetFloat(CU[i, 2], 0);
             UnityEngine.Debug.Log(temp.lvl + " " + temp.price + " " + temp.bonus);
         }
     }
 
-    void Start()
-    {
-        LoadData();
-    }
 }

@@ -4,6 +4,7 @@ using System.Data.Common;
 using System.Runtime.InteropServices;
 using TMPro;
 using Unity.VisualScripting;
+using Unity.VisualScripting.FullSerializer;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -13,10 +14,15 @@ public class ClickManager : MonoBehaviour
 
 	public GameObject MAINCLICKOBJECT;
     public GameObject UPGRADES_MENU;
+
+    [Header("UPGRADES LIST")]
     public GameObject CLICK_UPGRADES_LIST;
     public GameObject IDLE_UPGRADES_LIST;
+    public GameObject MULTIPLIER_UPGRADE_LIST;
+    public GameObject OTHER_UPGRADES_LIST;
     public RectTransform Canva;
 
+    [Header("TEXTS")]
     public TextMeshProUGUI TotalCash;
     public TextMeshProUGUI CashPS;
     public TextMeshProUGUI CashPerClick;
@@ -41,8 +47,11 @@ public class ClickManager : MonoBehaviour
     public bool CLICKED = false;
     public bool CanCLick = true;
 
+    private float Fsize; 
     private void Start()
     {
+        Fsize =  TotalCash.fontSize;
+        this.gameObject.GetComponent<UpgradeManager>().FUNCTION_TotalCashPerClick();
         StartCoroutine(IdleGain());
         NumberConverter = GetComponent<NumberConverter>();
         UPGRADES_MENU.transform.localPosition = new Vector3(0,-Canva.rect.height+200,0);
@@ -114,10 +123,13 @@ public class ClickManager : MonoBehaviour
             LeanTween.rotate(MAINCLICKOBJECT, new Vector3(0, 0, -5), 0.05f);
             LeanTween.rotate(MAINCLICKOBJECT, new Vector3(0, 0, 0), 0.05f).setDelay(0.05f);
         }
-        LeanTween.value(TotalCash.fontSize, TotalCash.fontSize+20, 0.05f).setOnUpdate((float val) => {
+
+        LeanTween.value(TotalCash.fontSize, TotalCash.fontSize + 20, 0.05f).setOnUpdate((float val) =>
+        {
             TotalCash.fontSize = Mathf.RoundToInt(val);
         });
-        LeanTween.value(TotalCash.fontSize, TotalCash.fontSize, 0.05f).setDelay(0.05f).setOnUpdate((float val) => {
+       
+        LeanTween.value(TotalCash.fontSize, Fsize, 0.05f).setDelay(0.05f).setOnUpdate((float val) => {
             TotalCash.fontSize = Mathf.RoundToInt(val);
         });
 
@@ -164,10 +176,28 @@ public class ClickManager : MonoBehaviour
     {
         CLICK_UPGRADES_LIST.SetActive(true);
         IDLE_UPGRADES_LIST.SetActive(false);
+        MULTIPLIER_UPGRADE_LIST.SetActive(false);
+        OTHER_UPGRADES_LIST.SetActive(false);
     }
     public void ShowIdleUpgrades()
     {
         IDLE_UPGRADES_LIST.SetActive(true);
         CLICK_UPGRADES_LIST.SetActive(false);
+        MULTIPLIER_UPGRADE_LIST.SetActive(false);
+        OTHER_UPGRADES_LIST.SetActive(false);
+    }
+    public void ShowCMultiplierUpgrades()
+    {
+        CLICK_UPGRADES_LIST.SetActive(false);
+        IDLE_UPGRADES_LIST.SetActive(false);
+        MULTIPLIER_UPGRADE_LIST.SetActive(true);
+        OTHER_UPGRADES_LIST.SetActive(false);
+    }
+    public void ShowOtherUpgrades()
+    {
+        CLICK_UPGRADES_LIST.SetActive(false);
+        IDLE_UPGRADES_LIST.SetActive(false);
+        MULTIPLIER_UPGRADE_LIST.SetActive(false);
+        OTHER_UPGRADES_LIST.SetActive(true);
     }
 }
