@@ -9,6 +9,7 @@ using UnityEngine.UIElements;
 public class GameSAVER : MonoBehaviour
 {
     public GameObject[] ClickUpgrades;
+    public GameObject[] IdleUpgrades;
     public ClickManager ClickManager;
 
     string[,] CU ={ { "CU_1_Level", "CU_1_Price", "CU_1_Bonus" },
@@ -73,8 +74,14 @@ public class GameSAVER : MonoBehaviour
             PlayerPrefs.SetInt(CU[i, 0], temp.lvl);
             PlayerPrefs.SetFloat(CU[i, 1], temp.price);
             PlayerPrefs.SetFloat(CU[i, 2], temp.bonus);
+        }
 
-            UnityEngine.Debug.Log(temp.lvl + " " + temp.price + " " + temp.bonus);
+        for (int i = 0; i < IdleUpgrades.Length; i++)
+        {
+            UpgradeInfo temp = IdleUpgrades[i].GetComponent<UpgradeInfo>();
+            PlayerPrefs.SetInt(IU[i, 0], temp.lvl);
+            PlayerPrefs.SetFloat(IU[i, 1], temp.price);
+            PlayerPrefs.SetFloat(IU[i, 2], temp.bonus);
         }
     }
 
@@ -90,8 +97,15 @@ public class GameSAVER : MonoBehaviour
             UpgradeInfo temp = ClickUpgrades[i].GetComponent<UpgradeInfo>();
             temp.lvl = PlayerPrefs.GetInt(CU[i, 0], 1);
             temp.price = PlayerPrefs.GetFloat(CU[i, 1], temp.start_price);
-            temp.bonus = PlayerPrefs.GetFloat(CU[i, 2], 0);
-            UnityEngine.Debug.Log(temp.lvl + " " + temp.price + " " + temp.bonus);
+            temp.bonus = PlayerPrefs.GetFloat(CU[i, 2], temp.start_bonus);
+        }
+
+        for (int i = 0; i < IdleUpgrades.Length; i++)
+        {
+            UpgradeInfo temp = IdleUpgrades[i].GetComponent<UpgradeInfo>();
+            temp.lvl = PlayerPrefs.GetInt(IU[i, 0], 1);
+            temp.price = PlayerPrefs.GetFloat(IU[i, 1], temp.start_price);
+            temp.bonus = PlayerPrefs.GetFloat(IU[i, 2], temp.start_bonus);
         }
     }
 

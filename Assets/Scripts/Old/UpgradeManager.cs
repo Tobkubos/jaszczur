@@ -31,6 +31,19 @@ public class UpgradeManager : MonoBehaviour
         ClickManager.click = TotalCashPerClick;
 
     }
+
+    public void FUNCTION_TotalIdleIncome()
+    {
+        float TotalIdleIncome = 0;
+        for (int i = 0; i < IdleUpgrades.Length - 2; i++)
+        {
+            TotalIdleIncome += IdleUpgrades[i].GetComponent<UpgradeInfo>().bonus;
+        }
+        ClickManager.CashPerSsec = TotalIdleIncome;
+
+    }
+
+
     public void ShowUpgradesPerLevel()
     {
         //CLICK

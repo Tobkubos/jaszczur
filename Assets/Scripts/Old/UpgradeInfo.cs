@@ -18,8 +18,9 @@ public class UpgradeInfo : MonoBehaviour
 
 	[Header("START DATA")]
 	public float start_price;
+    public float start_bonus;
 
-	[Header("DATA")]
+    [Header("DATA")]
     public int lvl;
     public float bonus;
 	public float price;
@@ -185,8 +186,16 @@ public class UpgradeInfo : MonoBehaviour
 				price *= priceChange;
 				lvl += 1;
 				CheckStars();
-				UpgradeManager.FUNCTION_TotalCashPerClick();
-			}
+				if (clickUpgrade == true)
+				{
+					UpgradeManager.FUNCTION_TotalCashPerClick();
+				}
+
+                if (idleUpgrade == true)
+                {
+                    UpgradeManager.FUNCTION_TotalIdleIncome();
+                }
+            }
 		}
 	}
 
