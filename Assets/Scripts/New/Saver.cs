@@ -46,7 +46,7 @@ public class Saver : MonoBehaviour
             ClickUpgrade temp = Storage.ClickUpgrades[i].GetComponent<ClickUpgrade>();
             temp.UPGRADE_Level = PlayerPrefs.GetInt(CU[i, 0], 0);
             temp.UPGRADE_Price = double.Parse(PlayerPrefs.GetString(CU[i, 1], temp.START_Price.ToString()));
-            temp.UPGRADE_Bonus = double.Parse(PlayerPrefs.GetString(CU[i, 2], temp.START_Bonus.ToString()));
+            temp.UPGRADE_Bonus = double.Parse(PlayerPrefs.GetString(CU[i, 2], 0.ToString()));
         }
     }
 

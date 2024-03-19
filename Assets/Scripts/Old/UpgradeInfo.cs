@@ -165,7 +165,7 @@ public class UpgradeInfo : MonoBehaviour
 		}
 	}
 
-    public void changeBuyCount()
+    public void ChangeBuyCount()
     {
         i++;
         if(i == 5)
@@ -175,7 +175,7 @@ public class UpgradeInfo : MonoBehaviour
         buyCount.text = "x " + tab[i].ToString();
     }
 
-	private void massUpgrade(float priceForUpgrades, float numOflvl)
+	private void MassUpgrade(float priceForUpgrades, float numOflvl)
 	{
 		if (Manager.Cash >= priceForUpgrades)
 		{
@@ -199,31 +199,31 @@ public class UpgradeInfo : MonoBehaviour
 		}
 	}
 
-	public void buyUpgrade()
+	public void BuyUpgrade()
     {
 		if(i == 0)
 		{
-			massUpgrade(price, 1);
+			MassUpgrade(price, 1);
 		}
 
 		if (i == 1)
 		{
-			massUpgrade(checkPrice(price, priceChange, 10), 10);
+			MassUpgrade(checkPrice(price, priceChange, 10), 10);
 		}
 
 		if (i == 2)
 		{
-			massUpgrade(checkPrice(price, priceChange, 25), 25);
+			MassUpgrade(checkPrice(price, priceChange, 25), 25);
 		}
 
 		if (i == 3)
 		{
-			massUpgrade(checkPrice(price, priceChange, 50), 50);
+			MassUpgrade(checkPrice(price, priceChange, 50), 50);
 		}
 
 		if (i == 4)
 		{
-			massUpgrade(checkPrice(price, priceChange, 100), 100);
+			MassUpgrade(checkPrice(price, priceChange, 100), 100);
 		}
 
 

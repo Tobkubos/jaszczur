@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1833842415654746677}
   - component: {fileID: 6461200188654887622}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: x times
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -243,7 +243,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 504.49, y: 24.05}
+  m_AnchoredPosition: {x: 504.5, y: 24.05}
   m_SizeDelta: {x: 695.23, y: 48.1005}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6323028072035031485
@@ -504,7 +504,7 @@ GameObject:
   - component: {fileID: 8448963097532721046}
   - component: {fileID: 1068068003003655476}
   - component: {fileID: 7689633137235469455}
-  - component: {fileID: 569604274722628789}
+  - component: {fileID: 1675787875467374421}
   - component: {fileID: 2151269427512003168}
   m_Layer: 5
   m_Name: upgrade 1
@@ -539,7 +539,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 225}
+  m_SizeDelta: {x: 1000, y: 225}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1068068003003655476
 CanvasRenderer:
@@ -579,7 +579,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &569604274722628789
+--- !u!114 &1675787875467374421
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -588,22 +588,25 @@ MonoBehaviour:
   m_GameObject: {fileID: 1726490463819273864}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5a1e4b7dbda5cc24aa84fe623f57bef0, type: 3}
+  m_Script: {fileID: 11500000, guid: 05f902735c21f354596b99e7a49ba032, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  index: 0
-  lvl: 0
-  bonus: 0
-  price: 0
-  priceChange: 1.1
-  bonusChange: 1
-  buyButton: {fileID: 6957562846888007794}
-  buyCount: {fileID: 6461200188654887622}
-  levelText: {fileID: 3750957722686009511}
-  priceText: {fileID: 8677434677417654396}
-  bonusText: {fileID: 1776435976962989301}
-  TotalbonusText: {fileID: 6141727472654312893}
-  NAME: {fileID: 8189629444418303130}
+  BUTTON_Buy: {fileID: 6957562846888007794}
+  BUTTON_Change: {fileID: 8062078799530931369}
+  STRING_NameOfUpgrade: dupa
+  STRING_DescOfUpgrade: klik
+  TEXT_NameOfUpgrade: {fileID: 8189629444418303130}
+  TEXT_BonusChange: {fileID: 1776435976962989301}
+  TEXT_Bonus: {fileID: 6141727472654312893}
+  TEXT_Price: {fileID: 8677434677417654396}
+  TEXT_Level: {fileID: 3750957722686009511}
+  TEXT_BuyCount: {fileID: 6461200188654887622}
+  START_Price: 5
+  UPGRADE_Level: 0
+  UPGRADE_Bonus: 0
+  UPGRADE_Price: 0
+  UPGRADE_BonusChange: 13
+  UPGRADE_PriceChange: 1.2
   stars:
   - {fileID: 6895894948342927430}
   - {fileID: 1946420454147256384}
@@ -615,10 +618,6 @@ MonoBehaviour:
   - {fileID: 7611347262012121945}
   - {fileID: 9124869316722005438}
   - {fileID: 5656640011223291894}
-  UpgradeName: Skibidi Click
-  UpgradeBonus: per click
-  clickUpgrade: 1
-  idleUpgrade: 0
 --- !u!114 &2151269427512003168
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -793,7 +792,7 @@ GameObject:
   - component: {fileID: 2129451687451864379}
   - component: {fileID: 6194529151858977792}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: buy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -950,7 +949,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: -294.13556, y: -68.73302}
+  m_AnchoredPosition: {x: -294, y: -68.73302}
   m_SizeDelta: {x: 292.5045, y: 87.534}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1958263578124521785
@@ -1034,7 +1033,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 235.86816, y: -85}
+  m_AnchoredPosition: {x: 236, y: -85}
   m_SizeDelta: {x: 447.8871, y: 39.805}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &5003350175420235358
@@ -1150,7 +1149,7 @@ GameObject:
   - component: {fileID: 5532395464198363565}
   - component: {fileID: 8677434677417654396}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: price
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1306,7 +1305,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 504.49, y: -22.563}
+  m_AnchoredPosition: {x: 504.5, y: -22.563}
   m_SizeDelta: {x: 695.23, y: 48.1005}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1964632462470275164
@@ -1440,7 +1439,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 499.96, y: 82.501}
+  m_AnchoredPosition: {x: 500, y: 82.501}
   m_SizeDelta: {x: 695.23, y: 59.9979}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8065907937188464003
@@ -1801,7 +1800,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: -73.98047, y: 43.767}
+  m_AnchoredPosition: {x: -74, y: 43.767}
   m_SizeDelta: {x: 147.8134, y: 137.47}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6950126295038078974
@@ -1886,9 +1885,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 569604274722628789}
-        m_TargetAssemblyTypeName: UpgradeInfo, Assembly-CSharp
-        m_MethodName: buyUpgrade
+      - m_Target: {fileID: 1675787875467374421}
+        m_TargetAssemblyTypeName: ClickUpgrade, Assembly-CSharp
+        m_MethodName: BuyUpgrade
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2143,7 +2142,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: -73.94531, y: -68.733}
+  m_AnchoredPosition: {x: -74, y: -68.733}
   m_SizeDelta: {x: 147.89, y: 87.534}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6558141693629128234
@@ -2228,9 +2227,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 569604274722628789}
-        m_TargetAssemblyTypeName: UpgradeInfo, Assembly-CSharp
-        m_MethodName: changeBuyCount
+      - m_Target: {fileID: 1675787875467374421}
+        m_TargetAssemblyTypeName: ClickUpgrade, Assembly-CSharp
+        m_MethodName: PriceChange
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
