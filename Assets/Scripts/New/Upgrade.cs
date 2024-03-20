@@ -36,6 +36,11 @@ public class Upgrade : MonoBehaviour
     public double   UPGRADE_BonusChange;
     public float    UPGRADE_PriceChange;
 
+    [Header("TYPE")]
+    public bool Click;
+    public bool Idle;
+    public bool Multiplier;
+
     public GameObject[] stars;
 
     private int[] tab = { 1,10,25,50,100};

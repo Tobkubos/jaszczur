@@ -1935,10 +1935,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 864736245}
+  - component: {fileID: 864736244}
   - component: {fileID: 864736248}
   - component: {fileID: 864736246}
-  - component: {fileID: 864736244}
   - component: {fileID: 864736247}
+  - component: {fileID: 864736249}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -1962,21 +1963,27 @@ MonoBehaviour:
   val_CashPerClick: 0
   val_CashPerSec: 0
   val_Diamonds: 0
+  val_DiamondsChance: 0
   val_MaxMultiplier: 0
   val_MultiplierCooldown: 0
+  val_DynamicMultiplier: 0
   val_ProfileLevel: 0
   val_ProfileExperienceToNextLvl: 0
+  Fsize: 0
   ClickUpgrades:
   - {fileID: 829122352}
   - {fileID: 1667683882}
   IdleUpgrades: []
   MultiplierUpgrades: []
+  ClickObject: {fileID: 896547190}
+  Slider: {fileID: 2126990463}
   TEXT_TotalCash: {fileID: 2029636471}
   TEXT_CashPerClick: {fileID: 626669199}
   TEXT_CashPerSec: {fileID: 1816017077}
   TEXT_Diamonds: {fileID: 687125223}
   TEXT_ProfileLevel: {fileID: 0}
   TEXT_ProfileExperienceToNextLvl: {fileID: 0}
+  TEXT_Multiplier: {fileID: 1650137519}
   NumberConverter: {fileID: 864736247}
 --- !u!4 &864736245
 Transform:
@@ -2031,6 +2038,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Storage: {fileID: 864736244}
+--- !u!114 &864736249
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 864736243}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7208c8d977d767c48aeaa7120fdc7aaf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Storage: {fileID: 864736244}
+  NumberConverter: {fileID: 864736247}
 --- !u!1 &896547190
 GameObject:
   m_ObjectHideFlags: 0
@@ -2113,9 +2134,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: ClickManager, Assembly-CSharp
-        m_MethodName: Click
+      - m_Target: {fileID: 864736249}
+        m_TargetAssemblyTypeName: Click, Assembly-CSharp
+        m_MethodName: FUNCTION_Click
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

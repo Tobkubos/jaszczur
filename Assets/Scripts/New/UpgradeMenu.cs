@@ -1,10 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Data.SqlTypes;
 using UnityEngine;
 
 public class UpgradeMenu : MonoBehaviour
 {
-    public Storage Storage;
     private void Start()
     {
         EnableUpgrade(Storage.ClickUpgrades);
@@ -18,7 +18,22 @@ public class UpgradeMenu : MonoBehaviour
         //CheckForUpgrade(Storage.IdleUpgrades);
         //CheckForUpgrade(Storage.MultiplierUpgrades);
     }
+    public void ShowClickUpgrades()
+    {
 
+    }
+    public void ShowIdleUpgrades()
+    {
+
+    }
+    public void ShowCMultiplierUpgrades()
+    {
+
+    }
+    public void ShowOtherUpgrades()
+    {
+
+    }
     private void CheckForUpgrade(GameObject[] tab)
     {
         for (int i = 0; i < tab.Length - 1; i++)
