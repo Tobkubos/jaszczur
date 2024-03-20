@@ -31,7 +31,7 @@ public class Saver : MonoBehaviour
     {
         for (int i = 0; i < Storage.ClickUpgrades.Length; i++)
         {
-            ClickUpgrade temp = Storage.ClickUpgrades[i].GetComponent<ClickUpgrade>();
+            Upgrade temp = Storage.ClickUpgrades[i].GetComponent<Upgrade>();
             PlayerPrefs.SetInt(CU[i, 0], temp.UPGRADE_Level);
             PlayerPrefs.SetString(CU[i, 1], temp.UPGRADE_Price.ToString());
             PlayerPrefs.SetString(CU[i, 2], temp.UPGRADE_Bonus.ToString());
@@ -43,7 +43,7 @@ public class Saver : MonoBehaviour
     {
         for (int i = 0; i < Storage.ClickUpgrades.Length; i++)
         {
-            ClickUpgrade temp = Storage.ClickUpgrades[i].GetComponent<ClickUpgrade>();
+            Upgrade temp = Storage.ClickUpgrades[i].GetComponent<Upgrade>();
             temp.UPGRADE_Level = PlayerPrefs.GetInt(CU[i, 0], 0);
             temp.UPGRADE_Price = double.Parse(PlayerPrefs.GetString(CU[i, 1], temp.START_Price.ToString()));
             temp.UPGRADE_Bonus = double.Parse(PlayerPrefs.GetString(CU[i, 2], 0.ToString()));
@@ -72,6 +72,8 @@ public class Saver : MonoBehaviour
     {
         PlayerPrefs.DeleteAll();
         LoadData();
-        //this.gameObject.GetComponent<UpgradeManager>().ShowUpgradesPerLevel();
+        this.gameObject.GetComponent<UpgradeMenu>().EnableUpgrade(Storage.ClickUpgrades);
+        //this.gameObject.GetComponent<UpgradeMenu>().EnableUpgrade(Storage.IdleUpgrades);
+        //this.gameObject.GetComponent<UpgradeMenu>().EnableUpgrade(Storage.MultiplierUpgrades);
     }
 }

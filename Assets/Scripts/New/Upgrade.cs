@@ -8,7 +8,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.XR;
 
-public class ClickUpgrade : MonoBehaviour
+public class Upgrade : MonoBehaviour
 {
     Storage Storage;
     NumberConverter NumberConverter;
@@ -42,14 +42,18 @@ public class ClickUpgrade : MonoBehaviour
     private int changer = 0;
     void Start()
     {
-        if (UPGRADE_Level == 0) UPGRADE_Price = START_Price;
-        NumberConverter = GetComponent<NumberConverter>();
         Storage = GameObject.Find("GameManager").GetComponent<Storage>();
 
+
+        if (UPGRADE_Level == 0) UPGRADE_Price = START_Price;
+        NumberConverter = GetComponent<NumberConverter>();
+
+
+        TEXT_NameOfUpgrade.text = STRING_NameOfUpgrade;
         TEXT_Price.text = "Cost: " + NumberConverter.FormatNumber(UPGRADE_Price);
         TEXT_Level.text = "lvl: " + UPGRADE_Level.ToString();
-        TEXT_BonusChange.text = "+ " + UPGRADE_BonusChange + " " + STRING_DescOfUpgrade;
-        TEXT_Bonus.text = UPGRADE_Bonus + " " + STRING_DescOfUpgrade;
+        TEXT_Bonus.text = " + " + UPGRADE_Bonus + STRING_DescOfUpgrade;
+        TEXT_BonusChange.text = " + " + UPGRADE_BonusChange + " " + STRING_DescOfUpgrade;
     }
     public void PriceChange()
     {
@@ -73,10 +77,6 @@ public class ClickUpgrade : MonoBehaviour
                 UPGRADE_Level += 1;
                 //CheckStars();
             }
-            TEXT_Price.text = "Cost: " + NumberConverter.FormatNumber(UPGRADE_Price);
-            TEXT_Level.text = "lvl: " + UPGRADE_Level.ToString();
-            TEXT_BonusChange.text = "+ " + UPGRADE_BonusChange + " " + STRING_DescOfUpgrade;
-            TEXT_Bonus.text = UPGRADE_Bonus + " " + STRING_DescOfUpgrade;
         }
     }
 
@@ -106,12 +106,6 @@ public class ClickUpgrade : MonoBehaviour
         {
             MassUpgrade(checkPrice(UPGRADE_Price, UPGRADE_PriceChange, 100), 100);
         }
-
-
-        TEXT_Price.text = "Cost: " + NumberConverter.FormatNumber(UPGRADE_Price);
-        TEXT_Level.text = "lvl: " + UPGRADE_Level.ToString();
-        TEXT_BonusChange.text = "+ " + UPGRADE_BonusChange + " " + STRING_DescOfUpgrade;
-        TEXT_Bonus.text = UPGRADE_Bonus + " " + STRING_DescOfUpgrade;
     }
 
     private double checkPrice(double price, float change, int numb)
@@ -136,6 +130,11 @@ public class ClickUpgrade : MonoBehaviour
 
     void Update()
     {
+        TEXT_Price.text = "Cost: " + NumberConverter.FormatNumber(UPGRADE_Price);
+        TEXT_Level.text = "lvl: " + UPGRADE_Level.ToString();
+        TEXT_Bonus.text = " + " + UPGRADE_Bonus + STRING_DescOfUpgrade;
+        TEXT_BonusChange.text = " + " + UPGRADE_BonusChange + " " + STRING_DescOfUpgrade;
+
         if (changer != null)
         {
             //1 UPGRADE

@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Transactions;
+using TMPro;
 using UnityEngine;
 
 public class Storage : MonoBehaviour
@@ -20,8 +21,21 @@ public class Storage : MonoBehaviour
     public GameObject[] ClickUpgrades;
     public GameObject[] IdleUpgrades;
     public GameObject[] MultiplierUpgrades;
-    private void Start()
+
+    public TextMeshProUGUI TEXT_TotalCash;
+    public TextMeshProUGUI TEXT_CashPerClick;
+    public TextMeshProUGUI TEXT_CashPerSec;
+    public TextMeshProUGUI TEXT_Diamonds;
+    public TextMeshProUGUI TEXT_ProfileLevel;
+    public TextMeshProUGUI TEXT_ProfileExperienceToNextLvl;
+    public NumberConverter NumberConverter;
+    private void Update()
     {
-        //Saver - Load data
+        TEXT_TotalCash.text     = NumberConverter.FormatNumber(val_TotalCash);
+        TEXT_CashPerClick.text  = NumberConverter.FormatNumber(val_CashPerClick) + " per click";
+        TEXT_CashPerSec.text    = NumberConverter.FormatNumber(val_CashPerSec)+ " /s";
+        TEXT_Diamonds.text      = NumberConverter.FormatNumber(val_Diamonds);
+        //proflie
+        //exp
     }
 }
