@@ -410,8 +410,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: ClickManager, Assembly-CSharp
+      - m_Target: {fileID: 864736248}
+        m_TargetAssemblyTypeName: UpgradeMenu, Assembly-CSharp
         m_MethodName: ShowOtherUpgrades
         m_Mode: 1
         m_Arguments:
@@ -1975,6 +1975,9 @@ MonoBehaviour:
   - {fileID: 1667683882}
   IdleUpgrades: []
   MultiplierUpgrades: []
+  LIST_ClickUpgraes: {fileID: 0}
+  LIST_IdleUpgraes: {fileID: 0}
+  LIST_MultiplierUpgraes: {fileID: 0}
   ClickObject: {fileID: 896547190}
   Slider: {fileID: 2126990463}
   TEXT_TotalCash: {fileID: 2029636471}
@@ -3979,8 +3982,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: ClickManager, Assembly-CSharp
+      - m_Target: {fileID: 864736248}
+        m_TargetAssemblyTypeName: UpgradeMenu, Assembly-CSharp
         m_MethodName: ShowClickUpgrades
         m_Mode: 1
         m_Arguments:
@@ -4588,8 +4591,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: ClickManager, Assembly-CSharp
+      - m_Target: {fileID: 864736248}
+        m_TargetAssemblyTypeName: UpgradeMenu, Assembly-CSharp
         m_MethodName: ShowIdleUpgrades
         m_Mode: 1
         m_Arguments:
@@ -4721,8 +4724,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: ClickManager, Assembly-CSharp
+      - m_Target: {fileID: 864736248}
+        m_TargetAssemblyTypeName: UpgradeMenu, Assembly-CSharp
         m_MethodName: ShowCMultiplierUpgrades
         m_Mode: 1
         m_Arguments:

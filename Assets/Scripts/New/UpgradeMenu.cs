@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class UpgradeMenu : MonoBehaviour
 {
+    public Storage Storage;
     private void Start()
     {
         EnableUpgrade(Storage.ClickUpgrades);
