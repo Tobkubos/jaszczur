@@ -22,7 +22,7 @@ public class Click : MonoBehaviour
         Storage.Slider.maxValue = 1f;
         normalizedTime = Mathf.Clamp01((Storage.val_MultiplierCooldown - Time.time) / 3f);
         Storage.Slider.value = normalizedTime;
-        Storage.TEXT_Multiplier.text = "x" + NumberConverter.FormatNumber(Storage.val_DynamicMultiplier);
+        Storage.TEXT_Multiplier.text = "x" + NumberConverter.FormatNumberFloat(Storage.val_DynamicMultiplier);
     }
 
     public void FUNCTION_Click()

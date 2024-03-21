@@ -23,12 +23,16 @@ public class Storage : MonoBehaviour
 
     public float Fsize;
 
+    public RectTransform Canva;
+
+    public GameObject   UpgradesMenu;
     public GameObject[] ClickUpgrades;
     public GameObject[] IdleUpgrades;
     public GameObject[] MultiplierUpgrades;
-    public GameObject   LIST_ClickUpgraes;
-    public GameObject   LIST_IdleUpgraes;
-    public GameObject   LIST_MultiplierUpgraes;
+    public GameObject   LIST_ClickUpgrades;
+    public GameObject   LIST_IdleUpgrades;
+    public GameObject   LIST_MultiplierUpgrades;
+    public GameObject   LIST_OtherUpgrades;
 
     public GameObject   ClickObject;
     public Slider       Slider;

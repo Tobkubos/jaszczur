@@ -82,6 +82,22 @@ public class Upgrade : MonoBehaviour
                 UPGRADE_Level += 1;
                 //CheckStars();
             }
+            if (Click)
+            {
+                Storage.val_CashPerClick = 0;
+                for (int i = 0; i < Storage.ClickUpgrades.Length; i++)
+                {
+                    Storage.val_CashPerClick += Storage.ClickUpgrades[i].GetComponent<Upgrade>().UPGRADE_Bonus;
+                }
+            }
+            if (Idle)
+            {
+                Storage.val_CashPerSec = 0;
+                for (int i = 0; i < Storage.IdleUpgrades.Length; i++)
+                {
+                    Storage.val_CashPerSec += Storage.IdleUpgrades[i].GetComponent<Upgrade>().UPGRADE_Bonus;
+                }
+            }
         }
     }
 
