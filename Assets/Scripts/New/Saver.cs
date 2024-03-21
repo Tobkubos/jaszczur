@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using System;
+using Unity.Burst.CompilerServices;
 
 public class Saver : MonoBehaviour
 {
@@ -36,6 +37,7 @@ public class Saver : MonoBehaviour
             PlayerPrefs.SetString(CU[i, 1], temp.UPGRADE_Price.ToString());
             PlayerPrefs.SetString(CU[i, 2], temp.UPGRADE_Bonus.ToString());
         }
+        PlayerPrefs.SetString("Time_OUT", DateTime.Now.ToString()); 
     }
     public void LoadData()
     {
@@ -47,11 +49,20 @@ public class Saver : MonoBehaviour
             temp.UPGRADE_Bonus = double.Parse(PlayerPrefs.GetString(CU[i, 2], 0.ToString()));
             Storage.val_CashPerClick += Storage.ClickUpgrades[i].GetComponent<Upgrade>().UPGRADE_Bonus;
         }
+        DateTime TIME_OUT;
+        if (DateTime.TryParse(PlayerPrefs.GetString("Time_OUT", 0.ToString()), out TIME_OUT))
+        {
+            DateTime TIME_IN = DateTime.Now;
+            TimeSpan TIME_BETWEEN = TIME_IN - TIME_OUT;
+            Storage.SECONDS = TIME_BETWEEN.TotalSeconds;
+            Storage.val_TotalCash += Storage.SECONDS * Storage.val_CashPerSec;
+        }
+    
     }
 
 
 
-    void Start()
+    void Awake()
     {
         LoadData();
     }

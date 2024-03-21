@@ -47,6 +47,8 @@ public class Storage : MonoBehaviour
 
     public NumberConverter NumberConverter;
 
+    public double SECONDS;
+
     void Start()
     {
         Fsize = TEXT_TotalCash.fontSize;
