@@ -8,6 +8,7 @@ using Unity.Burst.CompilerServices;
 public class Saver : MonoBehaviour
 {
     public Storage Storage;
+    public NumberConverter NumberConverter;
 
     string[,] CU ={ { "CU_1_Level", "CU_1_Price", "CU_1_Bonus" },
                     { "CU_2_Level", "CU_2_Price", "CU_2_Bonus" },
@@ -57,8 +58,9 @@ public class Saver : MonoBehaviour
             DateTime TIME_IN = DateTime.Now;
             TimeSpan TIME_BETWEEN = TIME_IN - TIME_OUT;
             Storage.SECONDS = TIME_BETWEEN.TotalSeconds;
-            Storage.val_TotalCash += Storage.SECONDS * Storage.val_CashPerSec;
-        }
+            Storage.TEXT_OfflineIncome.text = NumberConverter.FormatNumber(Storage.SECONDS * Storage.val_CashPerSec);
+			Storage.TEXT_OfflineTime.text = $"{TIME_BETWEEN.Days} days {TIME_BETWEEN.Hours} hours {TIME_BETWEEN.Minutes} minutes {TIME_BETWEEN.Seconds} seconds";
+		}
     
     }
 

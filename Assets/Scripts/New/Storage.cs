@@ -34,6 +34,8 @@ public class Storage : MonoBehaviour
     public GameObject   LIST_MultiplierUpgrades;
     public GameObject   LIST_OtherUpgrades;
 
+    public GameObject OfflineIncomeBox;
+
     public GameObject   ClickObject;
     public Slider       Slider;
 
@@ -45,7 +47,10 @@ public class Storage : MonoBehaviour
     public TextMeshProUGUI TEXT_ProfileExperienceToNextLvl;
     public TextMeshProUGUI TEXT_Multiplier;
 
-    public NumberConverter NumberConverter;
+    public TextMeshProUGUI TEXT_OfflineIncome;
+	public TextMeshProUGUI TEXT_OfflineTime;
+
+	public NumberConverter NumberConverter;
 
     public double SECONDS;
 
