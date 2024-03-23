@@ -37,10 +37,12 @@ public class Saver : MonoBehaviour
             PlayerPrefs.SetString(CU[i, 1], temp.UPGRADE_Price.ToString());
             PlayerPrefs.SetString(CU[i, 2], temp.UPGRADE_Bonus.ToString());
         }
+        PlayerPrefs.SetString("TotalCash", Storage.val_TotalCash.ToString());
         PlayerPrefs.SetString("Time_OUT", DateTime.Now.ToString()); 
     }
     public void LoadData()
     {
+        Storage.val_TotalCash = double.Parse(PlayerPrefs.GetString("TotalCash", 0.ToString()));
         for (int i = 0; i < Storage.ClickUpgrades.Length; i++)
         {
             Upgrade temp = Storage.ClickUpgrades[i].GetComponent<Upgrade>();
