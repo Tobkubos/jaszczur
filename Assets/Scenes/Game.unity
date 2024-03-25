@@ -219,7 +219,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.19000244, y: -545.68}
+  m_AnchoredPosition: {x: -0.1899414, y: -545.68}
   m_SizeDelta: {x: -0.38, y: 104.3162}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &16726202
@@ -703,7 +703,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.19000244, y: -218.88}
+  m_AnchoredPosition: {x: -0.1899414, y: -218.88}
   m_SizeDelta: {x: -0.38, y: 49.116}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &273190405
@@ -3007,7 +3007,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   val_TotalCash: 0
   val_CashPerClick: 1
-  val_CashPerSec: 126
+  val_CashPerSec: 0
   val_Diamonds: 0
   val_DiamondsChance: 0
   val_MaxMultiplier: 0
@@ -7101,7 +7101,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: 0.19500732, y: 28.999908}
+  m_AnchoredPosition: {x: 0.19506836, y: 28.999908}
   m_SizeDelta: {x: -0.39001465, y: 148.2287}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &1927480431
@@ -7765,7 +7765,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: -0.074157715, y: 12.734016}
+  m_AnchoredPosition: {x: -0.07421875, y: 12.734016}
   m_SizeDelta: {x: -223.78998, y: 1078.9272}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2081144063

@@ -53,6 +53,11 @@ public class Upgrade : MonoBehaviour
         if (UPGRADE_Level == 0) UPGRADE_Price = START_Price;
         NumberConverter = GetComponent<NumberConverter>();
 
+        for (int i = 0; i < stars.Length; i++)
+        {
+            stars[i].GetComponent<Image>().color = Color.white;
+        }
+        CheckStars();
 
         TEXT_NameOfUpgrade.text = STRING_NameOfUpgrade;
         TEXT_Price.text = "Cost: " + NumberConverter.FormatNumber(UPGRADE_Price);
@@ -70,6 +75,18 @@ public class Upgrade : MonoBehaviour
         TEXT_BuyCount.text = "x " + tab[changer].ToString();
     }
 
+    private void CheckStars()
+    {
+        int NumOfStars = UPGRADE_Level / 10;
+        if(NumOfStars <= stars.Length)
+        {
+            for(int i =0; i<NumOfStars; i++)
+            {
+                stars[i].GetComponent<Image>().color = Color.cyan;
+            }
+        }
+    }
+
     private void MassUpgrade(double priceForUpgrades, int numOflvl)
     {
         if (Storage.val_TotalCash >= priceForUpgrades)
@@ -80,7 +97,7 @@ public class Upgrade : MonoBehaviour
                 UPGRADE_Bonus += UPGRADE_BonusChange;
                 UPGRADE_Price *= UPGRADE_PriceChange;
                 UPGRADE_Level += 1;
-                //CheckStars();
+                CheckStars();
             }
             if (Click)
             {
