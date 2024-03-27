@@ -14,14 +14,15 @@ public class Storage : MonoBehaviour
     public double    val_Diamonds;
     public double    val_DiamondsChance;
 
-    public float     val_MaxMultiplier;
+    public double     val_MaxMultiplier;
     public float     val_MultiplierCooldown;
     public double    val_DynamicMultiplier;
 
     public int       val_ProfileLevel;
-    public int       val_ProfileExperienceToNextLvl;
+    public double    val_ProfileExperienceToNextLvl;
+	public double    val_experience;
 
-    public float Fsize;
+	public float Fsize;
 
     public RectTransform Canva;
 
@@ -38,13 +39,14 @@ public class Storage : MonoBehaviour
 
     public GameObject   ClickObject;
     public Slider       Slider;
+	public Slider       ProfileLevelSlider;
 
-    public TextMeshProUGUI TEXT_TotalCash;
+	public TextMeshProUGUI TEXT_TotalCash;
     public TextMeshProUGUI TEXT_CashPerClick;
     public TextMeshProUGUI TEXT_CashPerSec;
     public TextMeshProUGUI TEXT_Diamonds;
     public TextMeshProUGUI TEXT_ProfileLevel;
-    public TextMeshProUGUI TEXT_ProfileExperienceToNextLvl;
+	public TextMeshProUGUI TEXT_ProfileExperienceToNextLvl;
     public TextMeshProUGUI TEXT_Multiplier;
 
     public TextMeshProUGUI TEXT_OfflineIncome;
@@ -60,11 +62,11 @@ public class Storage : MonoBehaviour
     }
     void Update()
     {
-        TEXT_TotalCash.text     = NumberConverter.FormatNumber(val_TotalCash);
-        TEXT_CashPerClick.text  = NumberConverter.FormatNumber(val_CashPerClick) + " per click";
-        TEXT_CashPerSec.text    = NumberConverter.FormatNumber(val_CashPerSec)+ " /s";
-        TEXT_Diamonds.text      = NumberConverter.FormatNumber(val_Diamonds);
-        //proflie
-        //exp
-    }
+        TEXT_TotalCash.text                   = NumberConverter.FormatNumber(val_TotalCash);
+        TEXT_CashPerClick.text                = NumberConverter.FormatNumber(val_CashPerClick) + " per click";
+        TEXT_CashPerSec.text                  = NumberConverter.FormatNumber(val_CashPerSec)+ " /s";
+        TEXT_Diamonds.text                    = NumberConverter.FormatNumber(val_Diamonds);
+        TEXT_ProfileLevel.text                = NumberConverter.FormatNumber(val_ProfileLevel);
+		TEXT_ProfileExperienceToNextLvl.text  = NumberConverter.FormatNumber(val_experience) + " / " + NumberConverter.FormatNumber(val_ProfileExperienceToNextLvl);
+	}
 }

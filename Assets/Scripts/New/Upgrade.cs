@@ -62,7 +62,7 @@ public class Upgrade : MonoBehaviour
         TEXT_NameOfUpgrade.text = STRING_NameOfUpgrade;
         TEXT_Price.text = "Cost: " + NumberConverter.FormatNumber(UPGRADE_Price);
         TEXT_Level.text = "lvl: " + UPGRADE_Level.ToString();
-        TEXT_Bonus.text = " + " + UPGRADE_Bonus + STRING_DescOfUpgrade;
+        TEXT_Bonus.text = " + " + NumberConverter.FormatNumberfloat1(UPGRADE_Bonus) + STRING_DescOfUpgrade;
         TEXT_BonusChange.text = " + " + UPGRADE_BonusChange + " " + STRING_DescOfUpgrade;
     }
     public void PriceChange()
@@ -75,7 +75,7 @@ public class Upgrade : MonoBehaviour
         TEXT_BuyCount.text = "x " + tab[changer].ToString();
     }
 
-    private void CheckStars()
+    public void CheckStars()
     {
         int NumOfStars = UPGRADE_Level / 10;
         if(NumOfStars <= stars.Length)
@@ -115,7 +115,15 @@ public class Upgrade : MonoBehaviour
                     Storage.val_CashPerSec += Storage.IdleUpgrades[i].GetComponent<Upgrade>().UPGRADE_Bonus;
                 }
             }
-        }
+			if (Multiplier)
+			{
+				Storage.val_MaxMultiplier = 0;
+				for (int i = 0; i < Storage.IdleUpgrades.Length; i++)
+				{
+					Storage.val_MaxMultiplier += Storage.MultiplierUpgrades[i].GetComponent<Upgrade>().UPGRADE_Bonus;
+				}
+			}
+		}
     }
 
     public void BuyUpgrade()

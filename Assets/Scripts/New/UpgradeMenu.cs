@@ -14,15 +14,20 @@ public class UpgradeMenu : MonoBehaviour
     {
         Storage.UpgradesMenu.transform.localPosition = new Vector3(0, -Storage.Canva.rect.height + 200, 0);
         EnableUpgrade(Storage.ClickUpgrades);
-        //EnableUpgrade(Storage.IdleUpgrades);
-        //EnableUpgrade(Storage.MultiplierUpgrades);
-    }
+        EnableUpgrade(Storage.IdleUpgrades);
+        EnableUpgrade(Storage.MultiplierUpgrades);
+
+		Storage.LIST_ClickUpgrades.SetActive(true);
+		Storage.LIST_IdleUpgrades.SetActive(false);
+		Storage.LIST_MultiplierUpgrades.SetActive(false);
+		Storage.LIST_OtherUpgrades.SetActive(false);
+	}
 
     private void Update()
     {
         CheckForUpgrade(Storage.ClickUpgrades);
-        //CheckForUpgrade(Storage.IdleUpgrades);
-        //CheckForUpgrade(Storage.MultiplierUpgrades);
+        CheckForUpgrade(Storage.IdleUpgrades);
+        CheckForUpgrade(Storage.MultiplierUpgrades);
     }
     public void ShowUpgrades()
     {

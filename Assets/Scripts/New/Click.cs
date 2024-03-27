@@ -40,13 +40,14 @@ public class Click : MonoBehaviour
             {
                 Storage.val_MultiplierCooldown += 0.25f;
             }
-            if (Storage.val_DynamicMultiplier > 2f)
+            if (Storage.val_DynamicMultiplier > Storage.val_MaxMultiplier)
             {
-                Storage.val_DynamicMultiplier = 2f;
+                Storage.val_DynamicMultiplier = Storage.val_MaxMultiplier;
             }
         }
 
         Storage.val_TotalCash += Storage.val_CashPerClick * Storage.val_DynamicMultiplier;
+        Storage.val_experience += 1;
 
         int tempDiamond = Random.Range(0, 100);
         if (tempDiamond <= Storage.val_DiamondsChance)

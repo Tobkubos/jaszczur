@@ -57,4 +57,31 @@ public class NumberConverter : MonoBehaviour
             return number.ToString("F2");
         }
     }
+
+	public string FormatNumberfloat1(double number)
+	{
+		if (number >= 1000)
+		{
+			if (number >= 1000 && number < 1000000)
+			{
+				return (number / 1000).ToString("F1") + "k";
+			}
+			else if (number >= 1000000 && number < 1000000000)
+			{
+				return (number / 1000000).ToString("F1") + "M";
+			}
+			else if (number >= 1000000000 && number < 1000000000000)
+			{
+				return (number / 1000000000).ToString("F1") + "B";
+			}
+			else
+			{
+				return number.ToString("F1");
+			}
+		}
+		else
+		{
+			return number.ToString("F1");
+		}
+	}
 }

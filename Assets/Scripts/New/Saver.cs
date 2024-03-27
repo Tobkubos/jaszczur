@@ -4,6 +4,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using System;
 using Unity.Burst.CompilerServices;
+using UnityEngine.UIElements;
 
 public class Saver : MonoBehaviour
 {
@@ -39,12 +40,23 @@ public class Saver : MonoBehaviour
             PlayerPrefs.SetString(CU[i, 2], temp.UPGRADE_Bonus.ToString());
         }
         PlayerPrefs.SetString("TotalCash", Storage.val_TotalCash.ToString());
-        PlayerPrefs.SetString("Time_OUT", DateTime.Now.ToString()); 
+		PlayerPrefs.SetString("TotalDiamonds", Storage.val_Diamonds.ToString());
+		PlayerPrefs.SetString("Level", Storage.val_ProfileLevel.ToString());
+		PlayerPrefs.SetString("Experience", Storage.val_experience.ToString());
+		PlayerPrefs.SetString("ExperienceToNextLevel", Storage.val_ProfileExperienceToNextLvl.ToString());
+		PlayerPrefs.SetString("Time_OUT", DateTime.Now.ToString()); 
     }
     public void LoadData()
     {
-        Storage.val_TotalCash = double.Parse(PlayerPrefs.GetString("TotalCash", 0.ToString()));
-        for (int i = 0; i < Storage.ClickUpgrades.Length; i++)
+        Storage.val_TotalCash =                  double.Parse(PlayerPrefs.GetString("TotalCash", 0.ToString()));
+        Storage.val_Diamonds =                   double.Parse(PlayerPrefs.GetString("TotalDiamonds", 0.ToString()));
+		Storage.val_ProfileLevel =               int.Parse(PlayerPrefs.GetString("Level", 0.ToString()));
+        Storage.val_experience =                 double.Parse(PlayerPrefs.GetString("Experience", 0.ToString()));
+		Storage.val_ProfileExperienceToNextLvl = double.Parse(PlayerPrefs.GetString("ExperienceToNextLevel", 10.ToString()));
+		Storage.val_CashPerClick = 1;
+		Storage.val_CashPerSec = 0;
+		Storage.val_MaxMultiplier = 2;
+		for (int i = 0; i < Storage.ClickUpgrades.Length; i++)
         {
             Upgrade temp = Storage.ClickUpgrades[i].GetComponent<Upgrade>();
             temp.UPGRADE_Level = PlayerPrefs.GetInt(CU[i, 0], 0);
@@ -52,7 +64,27 @@ public class Saver : MonoBehaviour
             temp.UPGRADE_Bonus = double.Parse(PlayerPrefs.GetString(CU[i, 2], 0.ToString()));
             Storage.val_CashPerClick += Storage.ClickUpgrades[i].GetComponent<Upgrade>().UPGRADE_Bonus;
         }
-        DateTime TIME_OUT;
+
+		for (int i = 0; i < Storage.IdleUpgrades.Length; i++)
+		{
+			Upgrade temp = Storage.IdleUpgrades[i].GetComponent<Upgrade>();
+			temp.UPGRADE_Level = PlayerPrefs.GetInt(CU[i, 0], 0);
+			temp.UPGRADE_Price = double.Parse(PlayerPrefs.GetString(CU[i, 1], temp.START_Price.ToString()));
+			temp.UPGRADE_Bonus = double.Parse(PlayerPrefs.GetString(CU[i, 2], 0.ToString()));
+			Storage.val_CashPerSec += Storage.IdleUpgrades[i].GetComponent<Upgrade>().UPGRADE_Bonus;
+		}
+
+		for (int i = 0; i < Storage.MultiplierUpgrades.Length; i++)
+		{
+			Upgrade temp = Storage.MultiplierUpgrades[i].GetComponent<Upgrade>();
+			temp.UPGRADE_Level = PlayerPrefs.GetInt(CU[i, 0], 0);
+			temp.UPGRADE_Price = double.Parse(PlayerPrefs.GetString(CU[i, 1], temp.START_Price.ToString()));
+			temp.UPGRADE_Bonus = double.Parse(PlayerPrefs.GetString(CU[i, 2], 0.ToString()));
+			Storage.val_MaxMultiplier += Storage.MultiplierUpgrades[i].GetComponent<Upgrade>().UPGRADE_Bonus;
+		}
+
+		//OFFLINE INCOME
+		DateTime TIME_OUT;
         if (DateTime.TryParse(PlayerPrefs.GetString("Time_OUT", 0.ToString()), out TIME_OUT))
         {
             DateTime TIME_IN = DateTime.Now;
@@ -61,7 +93,6 @@ public class Saver : MonoBehaviour
             Storage.TEXT_OfflineIncome.text = NumberConverter.FormatNumber(Storage.SECONDS * Storage.val_CashPerSec);
 			Storage.TEXT_OfflineTime.text = $"{TIME_BETWEEN.Days} days {TIME_BETWEEN.Hours} hours {TIME_BETWEEN.Minutes} minutes {TIME_BETWEEN.Seconds} seconds";
 		}
-    
     }
 
 
@@ -84,10 +115,37 @@ public class Saver : MonoBehaviour
     }
     public void KeyReset()
     {
-        PlayerPrefs.DeleteAll();
+        Storage.val_Diamonds += 100;
+		PlayerPrefs.SetString("TotalDiamonds", Storage.val_Diamonds.ToString());
+		PlayerPrefs.SetString("Level", Storage.val_ProfileLevel.ToString());
+		PlayerPrefs.SetString("Experience", Storage.val_experience.ToString());
+		PlayerPrefs.SetString("ExperienceToNextLevel", Storage.val_ProfileExperienceToNextLvl.ToString());
+		double temp =  double.Parse(PlayerPrefs.GetString("TotalDiamonds", 0.ToString()));
+		int temp1 = int.Parse(PlayerPrefs.GetString("Level", 0.ToString()));
+		double temp2 = double.Parse(PlayerPrefs.GetString("Experience", 0.ToString()));
+		double temp3 = double.Parse(PlayerPrefs.GetString("ExperienceToNextLevel", 10.ToString()));
+		PlayerPrefs.DeleteAll();
         LoadData();
-        this.gameObject.GetComponent<UpgradeMenu>().EnableUpgrade(Storage.ClickUpgrades);
-        //this.gameObject.GetComponent<UpgradeMenu>().EnableUpgrade(Storage.IdleUpgrades);
-        //this.gameObject.GetComponent<UpgradeMenu>().EnableUpgrade(Storage.MultiplierUpgrades);
-    }
+        Storage.val_Diamonds = temp;
+        Storage.val_ProfileLevel = temp1;
+		Storage.val_experience = temp2;
+		Storage.val_ProfileExperienceToNextLvl = temp3;
+		this.gameObject.GetComponent<UpgradeMenu>().EnableUpgrade(Storage.ClickUpgrades);
+		this.gameObject.GetComponent<UpgradeMenu>().EnableUpgrade(Storage.IdleUpgrades);
+		this.gameObject.GetComponent<UpgradeMenu>().EnableUpgrade(Storage.MultiplierUpgrades);
+		for (int i = 0; i < Storage.ClickUpgrades.Length; i++)
+		{
+            Storage.ClickUpgrades[i].GetComponent<Upgrade>().CheckStars();
+		}
+
+		for (int i = 0; i < Storage.IdleUpgrades.Length; i++)
+		{
+			Storage.IdleUpgrades[i].GetComponent<Upgrade>().CheckStars();
+		}
+
+		for (int i = 0; i < Storage.MultiplierUpgrades.Length; i++)
+		{
+			Storage.MultiplierUpgrades[i].GetComponent<Upgrade>().CheckStars();
+		}
+	}
 }
