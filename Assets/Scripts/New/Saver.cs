@@ -113,6 +113,28 @@ public class Saver : MonoBehaviour
     {
         SaveData();
     }
+
+    public void FactoryReset()
+    {
+        PlayerPrefs.DeleteAll();
+        LoadData();
+
+		for (int i = 0; i < Storage.ClickUpgrades.Length; i++)
+		{
+			Storage.ClickUpgrades[i].GetComponent<Upgrade>().CheckStars();
+		}
+
+		for (int i = 0; i < Storage.IdleUpgrades.Length; i++)
+		{
+			Storage.IdleUpgrades[i].GetComponent<Upgrade>().CheckStars();
+		}
+
+		for (int i = 0; i < Storage.MultiplierUpgrades.Length; i++)
+		{
+			Storage.MultiplierUpgrades[i].GetComponent<Upgrade>().CheckStars();
+		}
+	}
+
     public void KeyReset()
     {
         Storage.val_Diamonds += 100;
@@ -120,10 +142,12 @@ public class Saver : MonoBehaviour
 		PlayerPrefs.SetString("Level", Storage.val_ProfileLevel.ToString());
 		PlayerPrefs.SetString("Experience", Storage.val_experience.ToString());
 		PlayerPrefs.SetString("ExperienceToNextLevel", Storage.val_ProfileExperienceToNextLvl.ToString());
+
 		double temp =  double.Parse(PlayerPrefs.GetString("TotalDiamonds", 0.ToString()));
 		int temp1 = int.Parse(PlayerPrefs.GetString("Level", 0.ToString()));
 		double temp2 = double.Parse(PlayerPrefs.GetString("Experience", 0.ToString()));
 		double temp3 = double.Parse(PlayerPrefs.GetString("ExperienceToNextLevel", 10.ToString()));
+
 		PlayerPrefs.DeleteAll();
         LoadData();
         Storage.val_Diamonds = temp;
@@ -133,6 +157,7 @@ public class Saver : MonoBehaviour
 		this.gameObject.GetComponent<UpgradeMenu>().EnableUpgrade(Storage.ClickUpgrades);
 		this.gameObject.GetComponent<UpgradeMenu>().EnableUpgrade(Storage.IdleUpgrades);
 		this.gameObject.GetComponent<UpgradeMenu>().EnableUpgrade(Storage.MultiplierUpgrades);
+
 		for (int i = 0; i < Storage.ClickUpgrades.Length; i++)
 		{
             Storage.ClickUpgrades[i].GetComponent<Upgrade>().CheckStars();

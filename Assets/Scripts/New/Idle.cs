@@ -6,6 +6,7 @@ public class Idle : MonoBehaviour
 {
 	public Storage Storage;
 	public NumberConverter NumberConverter;
+	public int FirstStart = 1;
 
 	public IEnumerator IdleGain()
 	{
@@ -18,8 +19,21 @@ public class Idle : MonoBehaviour
 
 	private void Start()
 	{
+		FirstStart = PlayerPrefs.GetInt("FirstStart", 1);
+		if (FirstStart == 0)
+		{
+			Storage.OfflineIncomeBox.SetActive(true);
+		}
+
+		if (FirstStart == 1)
+		{
+			Storage.OfflineIncomeBox.SetActive(false);
+			FirstStart= 0;
+			PlayerPrefs.SetInt("FirstStart", FirstStart);
+		}
+
 		StartCoroutine(IdleGain());
-		Storage.OfflineIncomeBox.SetActive(true);
+
 	}
 
 	public void Collect()

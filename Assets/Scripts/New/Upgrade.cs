@@ -62,7 +62,7 @@ public class Upgrade : MonoBehaviour
         TEXT_NameOfUpgrade.text = STRING_NameOfUpgrade;
         TEXT_Price.text = "Cost: " + NumberConverter.FormatNumber(UPGRADE_Price);
         TEXT_Level.text = "lvl: " + UPGRADE_Level.ToString();
-        TEXT_Bonus.text = " + " + NumberConverter.FormatNumberfloat1(UPGRADE_Bonus) + STRING_DescOfUpgrade;
+        TEXT_Bonus.text = " + " + NumberConverter.FormatNumberfloat1(UPGRADE_Bonus) + " " + STRING_DescOfUpgrade;
         TEXT_BonusChange.text = " + " + UPGRADE_BonusChange + " " + STRING_DescOfUpgrade;
     }
     public void PriceChange()
@@ -77,7 +77,12 @@ public class Upgrade : MonoBehaviour
 
     public void CheckStars()
     {
-        int NumOfStars = UPGRADE_Level / 10;
+		for (int i = 0; i < stars.Length; i++)
+		{
+			stars[i].GetComponent<Image>().color = Color.white;
+		}
+
+		int NumOfStars = UPGRADE_Level / 10;
         if(NumOfStars <= stars.Length)
         {
             for(int i =0; i<NumOfStars; i++)
@@ -178,7 +183,7 @@ public class Upgrade : MonoBehaviour
     {
         TEXT_Price.text = "Cost: " + NumberConverter.FormatNumber(UPGRADE_Price);
         TEXT_Level.text = "lvl: " + UPGRADE_Level.ToString();
-        TEXT_Bonus.text = " + " + UPGRADE_Bonus + STRING_DescOfUpgrade;
+        TEXT_Bonus.text = " + " + UPGRADE_Bonus + " " + STRING_DescOfUpgrade;
         TEXT_BonusChange.text = " + " + UPGRADE_BonusChange + " " + STRING_DescOfUpgrade;
 
         if (changer != null)
