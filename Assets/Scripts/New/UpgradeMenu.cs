@@ -1,8 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Data.SqlTypes;
-using Unity.VisualScripting;
-using Unity.VisualScripting.ReorderableList;
 using UnityEngine;
 
 public class UpgradeMenu : MonoBehaviour
