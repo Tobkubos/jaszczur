@@ -7,6 +7,7 @@ public class Click : MonoBehaviour
     public NumberConverter NumberConverter;
     private bool DynMul = false;
     private float normalizedTime;
+    public float Cooldown = 10;
 
     private void FixedUpdate()
     {
@@ -25,6 +26,7 @@ public class Click : MonoBehaviour
 
     public void FUNCTION_Click()
     {
+        Cooldown = Time.time + 5;
         if (DynMul == false)
         {
             Storage.val_MultiplierCooldown = Time.time + 3f;
