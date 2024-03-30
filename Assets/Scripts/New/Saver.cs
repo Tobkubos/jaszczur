@@ -88,7 +88,7 @@ public class Saver : MonoBehaviour
             TimeSpan TIME_BETWEEN = TIME_IN - TIME_OUT;
             Storage.SECONDS = TIME_BETWEEN.TotalSeconds;
             Storage.TEXT_OfflineIncome.text = NumberConverter.FormatNumber(Storage.SECONDS * Storage.val_CashPerSec);
-			Storage.TEXT_OfflineTime.text = $"{TIME_BETWEEN.Days} days {TIME_BETWEEN.Hours} hours {TIME_BETWEEN.Minutes} minutes {TIME_BETWEEN.Seconds} seconds";
+			Storage.TEXT_OfflineTime.text = $"{TIME_BETWEEN.Days} days\n {TIME_BETWEEN.Hours} hours\n {TIME_BETWEEN.Minutes} minutes\n {TIME_BETWEEN.Seconds} seconds";
 		}
     }
 

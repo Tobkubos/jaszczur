@@ -56,7 +56,7 @@ public class Upgrade : MonoBehaviour
         CheckStars();
 
         TEXT_NameOfUpgrade.text = STRING_NameOfUpgrade;
-        TEXT_Price.text = "Cost: " + NumberConverter.FormatNumber(UPGRADE_Price);
+        TEXT_Price.text = NumberConverter.FormatNumber(UPGRADE_Price);
         TEXT_Level.text = "lvl: " + UPGRADE_Level.ToString();
         TEXT_Bonus.text = " + " + NumberConverter.FormatNumberfloat1(UPGRADE_Bonus) + " " + STRING_DescOfUpgrade;
         TEXT_BonusChange.text = " + " + UPGRADE_BonusChange + " " + STRING_DescOfUpgrade;
@@ -177,7 +177,7 @@ public class Upgrade : MonoBehaviour
 
     void Update()
     {
-        TEXT_Price.text = "Cost: " + NumberConverter.FormatNumber(UPGRADE_Price);
+        TEXT_Price.text = NumberConverter.FormatNumber(UPGRADE_Price);
         TEXT_Level.text = "lvl: " + UPGRADE_Level.ToString();
         TEXT_Bonus.text = " + " + UPGRADE_Bonus + " " + STRING_DescOfUpgrade;
         TEXT_BonusChange.text = " + " + UPGRADE_BonusChange + " " + STRING_DescOfUpgrade;
@@ -187,7 +187,7 @@ public class Upgrade : MonoBehaviour
             //1 UPGRADE
             if (changer == 0)
             {
-                TEXT_Price.text = "Cost: " + NumberConverter.FormatNumber(UPGRADE_Price);
+                TEXT_Price.text = NumberConverter.FormatNumber(UPGRADE_Price);
                 CanBuy(UPGRADE_Price);
             }
 
@@ -195,7 +195,7 @@ public class Upgrade : MonoBehaviour
             if (changer == 1)
             {
                 double priceX10 = checkPrice(UPGRADE_Price, UPGRADE_PriceChange, 10);
-                TEXT_Price.text = "Cost: " + NumberConverter.FormatNumber(priceX10);
+                TEXT_Price.text = NumberConverter.FormatNumber(priceX10);
                 CanBuy(priceX10);
             }
 
@@ -203,7 +203,7 @@ public class Upgrade : MonoBehaviour
             if (changer == 2)
             {
                 double priceX25 = checkPrice(UPGRADE_Price, UPGRADE_PriceChange, 25);
-                TEXT_Price.text = "Cost: " + NumberConverter.FormatNumber(priceX25);
+                TEXT_Price.text = NumberConverter.FormatNumber(priceX25);
                 CanBuy(priceX25);
             }
 
@@ -211,7 +211,7 @@ public class Upgrade : MonoBehaviour
             if (changer == 3)
             {
                 double priceX50 = checkPrice(UPGRADE_Price, UPGRADE_PriceChange, 50);
-                TEXT_Price.text = "Cost: " + NumberConverter.FormatNumber(priceX50);
+                TEXT_Price.text = NumberConverter.FormatNumber(priceX50);
                 CanBuy(priceX50);
             }
 
@@ -219,7 +219,7 @@ public class Upgrade : MonoBehaviour
             if (changer == 4)
             {
                 double priceX100 = checkPrice(UPGRADE_Price, UPGRADE_PriceChange, 100);
-                TEXT_Price.text = "Cost: " + NumberConverter.FormatNumber(priceX100);
+                TEXT_Price.text = NumberConverter.FormatNumber(priceX100);
                 CanBuy(priceX100);
             }
 

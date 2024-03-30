@@ -31,6 +31,8 @@ public class Storage : MonoBehaviour
     public GameObject   LIST_IdleUpgrades;
     public GameObject   LIST_MultiplierUpgrades;
     public GameObject   LIST_OtherUpgrades;
+    public GameObject   Cash_Icon;
+    public GameObject   Bonus_Popup;
 
     public GameObject OfflineIncomeBox;
 

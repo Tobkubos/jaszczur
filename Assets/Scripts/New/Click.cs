@@ -22,11 +22,14 @@ public class Click : MonoBehaviour
         normalizedTime = Mathf.Clamp01((Storage.val_MultiplierCooldown - Time.time) / 3f);
         Storage.Slider.value = normalizedTime;
         Storage.TEXT_Multiplier.text = "x" + NumberConverter.FormatNumberFloat(Storage.val_DynamicMultiplier);
+
+
     }
 
     public void FUNCTION_Click()
     {
         Cooldown = Time.time + 5;
+        Debug.Log(Cooldown);
         if (DynMul == false)
         {
             Storage.val_MultiplierCooldown = Time.time + 3f;
@@ -73,7 +76,9 @@ public class Click : MonoBehaviour
             LeanTween.rotate(Storage.ClickObject, new Vector3(0, 0, 0), 0.05f).setDelay(0.05f);
         }
 
-        LeanTween.value(Storage.TEXT_TotalCash.fontSize, Storage.TEXT_TotalCash.fontSize + 20, 0.05f).setOnUpdate((float val) =>
+        LeanTween.scale(Storage.Cash_Icon, new Vector3(1.1f, 1.1f, 1.1f), 0.05f);
+		LeanTween.scale(Storage.Cash_Icon, new Vector3(1f, 1f, 1f), 0.05f).setDelay(0.05f);
+		LeanTween.value(Storage.TEXT_TotalCash.fontSize, Storage.TEXT_TotalCash.fontSize + 20, 0.05f).setOnUpdate((float val) =>
         {
             Storage.TEXT_TotalCash.fontSize = Mathf.RoundToInt(val);
         });

@@ -1,25 +1,45 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class HandMovement : MonoBehaviour
 {
+	public Click click;
+	private bool isActive;
+	public GameObject hand;
     void Start()
     {
         StartCoroutine(Animation());
-		this.gameObject.SetActive(false);
+		hand.gameObject.SetActive(false);
+	}
+
+	private void Update()
+	{
+		Debug.Log(click.Cooldown);
+		if (Time.time > click.Cooldown && isActive==false)
+		{
+			isActive= true;
+			hand.gameObject.SetActive(true);
+		}
+		if (Time.time < click.Cooldown && isActive == true)
+		{
+			isActive = false;
+			hand.gameObject.SetActive(false);
+		}
+
 	}
 	IEnumerator Animation()
     {
-		while (this.gameObject.activeSelf)
+		float speed = 0.5f;
+		while (hand.gameObject.activeSelf)
         {
-            LeanTween.moveX(this.gameObject, this.gameObject.transform.position.x + 50f, 1).setLoopPingPong().setEase(LeanTweenType.easeInOutSine);
-			LeanTween.moveY(this.gameObject, this.gameObject.transform.position.y - 50f, 1).setLoopPingPong().setEase(LeanTweenType.easeInOutSine);
+            LeanTween.moveX(hand.gameObject, hand.gameObject.transform.position.x + 50f, speed).setLoopPingPong().setEase(LeanTweenType.easeInOutSine);
+			LeanTween.moveY(hand.gameObject, hand.gameObject.transform.position.y - 50f, speed).setLoopPingPong().setEase(LeanTweenType.easeInOutSine);
 			yield return new WaitForSeconds(1);
-			LeanTween.moveX(this.gameObject, this.gameObject.transform.position.x - 50f, 1).setLoopPingPong().setEase(LeanTweenType.easeInOutSine);
-			LeanTween.moveY(this.gameObject, this.gameObject.transform.position.y + 50f, 1).setLoopPingPong().setEase(LeanTweenType.easeInOutSine);
+			LeanTween.moveX(hand.gameObject, hand.gameObject.transform.position.x - 50f, speed).setLoopPingPong().setEase(LeanTweenType.easeInOutSine);
+			LeanTween.moveY(hand.gameObject, hand.gameObject.transform.position.y + 50f, speed).setLoopPingPong().setEase(LeanTweenType.easeInOutSine);
 			yield return new WaitForSeconds(1);
 		}
-
     }
 }
