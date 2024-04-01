@@ -32,13 +32,14 @@ public class HandMovement : MonoBehaviour
 	IEnumerator Animation()
     {
 		float speed = 0.5f;
+		float move = 5;
 		while (hand.gameObject.activeSelf)
         {
-            LeanTween.moveX(hand.gameObject, hand.gameObject.transform.position.x + 50f, speed).setLoopPingPong().setEase(LeanTweenType.easeInOutSine);
-			LeanTween.moveY(hand.gameObject, hand.gameObject.transform.position.y - 50f, speed).setLoopPingPong().setEase(LeanTweenType.easeInOutSine);
+            LeanTween.moveX(hand.gameObject, hand.gameObject.transform.position.x + move, speed).setLoopPingPong().setEase(LeanTweenType.easeInOutSine);
+			LeanTween.moveY(hand.gameObject, hand.gameObject.transform.position.y - move, speed).setLoopPingPong().setEase(LeanTweenType.easeInOutSine);
 			yield return new WaitForSeconds(1);
-			LeanTween.moveX(hand.gameObject, hand.gameObject.transform.position.x - 50f, speed).setLoopPingPong().setEase(LeanTweenType.easeInOutSine);
-			LeanTween.moveY(hand.gameObject, hand.gameObject.transform.position.y + 50f, speed).setLoopPingPong().setEase(LeanTweenType.easeInOutSine);
+			LeanTween.moveX(hand.gameObject, hand.gameObject.transform.position.x - move, speed).setLoopPingPong().setEase(LeanTweenType.easeInOutSine);
+			LeanTween.moveY(hand.gameObject, hand.gameObject.transform.position.y + move, speed).setLoopPingPong().setEase(LeanTweenType.easeInOutSine);
 			yield return new WaitForSeconds(1);
 		}
     }

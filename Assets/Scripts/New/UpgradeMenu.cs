@@ -6,9 +6,10 @@ public class UpgradeMenu : MonoBehaviour
     public Storage Storage;
     private bool CanClick = true;
     private bool CLICKED = false;
+    private float move = 150f;
     private void Start()
     {
-        Storage.UpgradesMenu.transform.localPosition = new Vector3(0, -Storage.Canva.rect.height + 200, 0);
+        Storage.UpgradesMenu.transform.localPosition = new Vector3(0, -Storage.Canva.rect.height + move, 0);
         EnableUpgrade(Storage.ClickUpgrades);
         EnableUpgrade(Storage.IdleUpgrades);
         EnableUpgrade(Storage.MultiplierUpgrades);
@@ -35,12 +36,12 @@ public class UpgradeMenu : MonoBehaviour
             {
                 CLICKED = true;
                 StartCoroutine(Cooldown());
-                LeanTween.moveLocalY(Storage.UpgradesMenu, -Storage.Canva.rect.height / 3 - 200f, 0.5f).setEase(LeanTweenType.easeInOutSine);
+                LeanTween.moveLocalY(Storage.UpgradesMenu, -Storage.Canva.rect.height / 3 - move, 0.5f).setEase(LeanTweenType.easeInOutSine);
             }
             else if (CLICKED == true)
             {
                 CLICKED = false;
-                LeanTween.moveLocalY(Storage.UpgradesMenu, -Storage.Canva.rect.height + 200, 0.5f).setEase(LeanTweenType.easeInOutSine);
+                LeanTween.moveLocalY(Storage.UpgradesMenu, -Storage.Canva.rect.height + move, 0.5f).setEase(LeanTweenType.easeInOutSine);
                 StartCoroutine(Cooldown());
             }
         }
