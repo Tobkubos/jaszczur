@@ -27,9 +27,10 @@ public class Saver : MonoBehaviour
                     { "IU_7_Level", "IU_7_Price", "IU_7_Bonus" },
                     { "IU_8_Level", "IU_8_Price", "IU_8_Bonus" },
     };
-    public void SaveData()
+
+	public void SaveData()
     {
-        for (int i = 0; i < Storage.ClickUpgrades.Length; i++)
+		for (int i = 0; i < Storage.ClickUpgrades.Length; i++)
         {
             Upgrade temp = Storage.ClickUpgrades[i].GetComponent<Upgrade>();
             PlayerPrefs.SetInt(CU[i, 0], temp.UPGRADE_Level);
@@ -43,7 +44,7 @@ public class Saver : MonoBehaviour
 		PlayerPrefs.SetString("ExperienceToNextLevel", Storage.val_ProfileExperienceToNextLvl.ToString());
 		PlayerPrefs.SetString("Time_OUT", DateTime.Now.ToString()); 
     }
-    public void LoadData()
+	public void LoadData()
     {
         Storage.val_TotalCash =                  double.Parse(PlayerPrefs.GetString("TotalCash", 0.ToString()));
         Storage.val_Diamonds =                   double.Parse(PlayerPrefs.GetString("TotalDiamonds", 0.ToString()));
@@ -66,8 +67,8 @@ public class Saver : MonoBehaviour
 		{
 			Upgrade temp = Storage.IdleUpgrades[i].GetComponent<Upgrade>();
 			temp.UPGRADE_Level = PlayerPrefs.GetInt(CU[i, 0], 0);
-			temp.UPGRADE_Price = double.Parse(PlayerPrefs.GetString(CU[i, 1], temp.START_Price.ToString()));
-			temp.UPGRADE_Bonus = double.Parse(PlayerPrefs.GetString(CU[i, 2], 0.ToString()));
+			temp.UPGRADE_Price = double.Parse(PlayerPrefs.GetString(IU[i, 1], temp.START_Price.ToString()));
+			temp.UPGRADE_Bonus = double.Parse(PlayerPrefs.GetString(IU[i, 2], 0.ToString()));
 			Storage.val_CashPerSec += Storage.IdleUpgrades[i].GetComponent<Upgrade>().UPGRADE_Bonus;
 		}
 
