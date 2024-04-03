@@ -50,7 +50,7 @@ public class Click : MonoBehaviour
         }
 
         Storage.val_TotalCash += Storage.val_CashPerClick * Storage.val_DynamicMultiplier;
-        Storage.val_experience += 1;
+        Storage.val_experience += 1 + Storage.val_experiencePerClick;
 
         int tempDiamond = Random.Range(0, 100);
         if (tempDiamond <= Storage.val_DiamondsChance)

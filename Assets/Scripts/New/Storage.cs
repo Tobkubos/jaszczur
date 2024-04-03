@@ -18,6 +18,7 @@ public class Storage : MonoBehaviour
     public int       val_ProfileLevel;
     public double    val_ProfileExperienceToNextLvl;
 	public double    val_experience;
+    public double    val_experiencePerClick;
 
 	public float Fsize;
 
@@ -27,6 +28,7 @@ public class Storage : MonoBehaviour
     public GameObject[] ClickUpgrades;
     public GameObject[] IdleUpgrades;
     public GameObject[] MultiplierUpgrades;
+    public GameObject[] Achievements;
     public GameObject   LIST_ClickUpgrades;
     public GameObject   LIST_IdleUpgrades;
     public GameObject   LIST_MultiplierUpgrades;
