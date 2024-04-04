@@ -117,6 +117,15 @@ public class Saver : MonoBehaviour
         PlayerPrefs.DeleteAll();
         LoadData();
 
+        Storage.val_ach_experiencePerClick = 0;
+        Storage.val_ach_MultiplierPerClick = 0;
+        Storage.val_ach_StartMultiplier = 0;
+
+        for(int i = 0; i<Storage.Achievements.Length; i++)
+        {
+            Storage.Achievements[i].GetComponent<Achievement>().collected = false;
+        }
+
 		for (int i = 0; i < Storage.ClickUpgrades.Length; i++)
 		{
 			Storage.ClickUpgrades[i].GetComponent<Upgrade>().CheckStars();

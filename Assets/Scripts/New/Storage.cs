@@ -11,14 +11,18 @@ public class Storage : MonoBehaviour
     public double    val_Diamonds;
     public double    val_DiamondsChance;
 
-    public double     val_MaxMultiplier;
+    public double    val_MaxMultiplier;
     public float     val_MultiplierCooldown;
     public double    val_DynamicMultiplier;
 
     public int       val_ProfileLevel;
     public double    val_ProfileExperienceToNextLvl;
 	public double    val_experience;
-    public double    val_experiencePerClick;
+
+
+    public double    val_ach_experiencePerClick;
+    public double    val_ach_StartMultiplier;
+    public double    val_ach_MultiplierPerClick;
 
 	public float Fsize;
 

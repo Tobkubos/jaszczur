@@ -13,7 +13,7 @@ public class Click : MonoBehaviour
     {
         if (Storage.val_MultiplierCooldown < Time.time)
         {
-            Storage.val_DynamicMultiplier = 1;
+            Storage.val_DynamicMultiplier = 1 + Storage.val_ach_StartMultiplier;
             Storage.val_MultiplierCooldown = 0;
             DynMul = false;
         }
@@ -38,9 +38,11 @@ public class Click : MonoBehaviour
 
         if (DynMul == true && Storage.val_MultiplierCooldown > Time.time)
         {
-            Storage.val_DynamicMultiplier += 0.01f;
+            //
+            Storage.val_DynamicMultiplier += 0.01f + Storage.val_ach_MultiplierPerClick;
             if (Storage.val_MultiplierCooldown < Time.time + 3)
             {
+                //
                 Storage.val_MultiplierCooldown += 0.25f;
             }
             if (Storage.val_DynamicMultiplier > Storage.val_MaxMultiplier)
@@ -49,8 +51,10 @@ public class Click : MonoBehaviour
             }
         }
 
+        //
         Storage.val_TotalCash += Storage.val_CashPerClick * Storage.val_DynamicMultiplier;
-        Storage.val_experience += 1 + Storage.val_experiencePerClick;
+        Storage.val_experience += 1 + Storage.val_ach_experiencePerClick;
+        //
 
         int tempDiamond = Random.Range(0, 100);
         if (tempDiamond <= Storage.val_DiamondsChance)
