@@ -11,6 +11,7 @@ public class AchievementsMenu : MonoBehaviour
     public TextMeshProUGUI achievementsToCollect;
     public GameObject bgToCollect;
     public int num = 0;
+    private float move = 150f;
     void Start()
     {
         
@@ -18,11 +19,11 @@ public class AchievementsMenu : MonoBehaviour
     
     public void ShowAchievements()
     {
-        AchievementsList.SetActive(true);
+        AchievementsList.transform.localPosition = new Vector3(0, 0, 0);
     }
     public void CloseAchievements()
     {
-        AchievementsList.SetActive(false);
+        AchievementsList.transform.localPosition = new Vector3(0, 4096, 0);
     }
 
     void Update()
