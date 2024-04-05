@@ -50,6 +50,10 @@ public class Achievement : MonoBehaviour
             {
                 button.GetComponent<Button>().interactable = true;
             }
+            else
+            {
+				button.GetComponent<Button>().interactable = false;
+			}
         }
         if(PlayerPrefs.GetInt(achSaveName) == 0)
         {

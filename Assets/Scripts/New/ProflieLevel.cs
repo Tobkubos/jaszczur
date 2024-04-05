@@ -13,6 +13,7 @@ public class ProflieLevel : MonoBehaviour
             Storage.val_experience = 0;
             Storage.val_ProfileExperienceToNextLvl *= 1.2f;
             Storage.val_ProfileLevel += 1;
+            Storage.ParticleLevelUp.Play();
         }
 	}
 }

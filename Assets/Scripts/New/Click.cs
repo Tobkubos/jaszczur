@@ -54,9 +54,10 @@ public class Click : MonoBehaviour
         //
         Storage.val_TotalCash += Storage.val_CashPerClick * Storage.val_DynamicMultiplier;
         Storage.val_experience += 1 + Storage.val_ach_experiencePerClick;
-        //
+		Storage.ParticleClick.Play();
+		//
 
-        int tempDiamond = Random.Range(0, 100);
+		int tempDiamond = Random.Range(0, 100);
         if (tempDiamond <= Storage.val_DiamondsChance)
         {
             Storage.val_Diamonds += 1;

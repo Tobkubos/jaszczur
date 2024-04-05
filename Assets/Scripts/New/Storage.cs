@@ -59,7 +59,10 @@ public class Storage : MonoBehaviour
 
 	public NumberConverter NumberConverter;
 
-    public double SECONDS;
+    public ParticleSystem ParticleClick;
+	public ParticleSystem ParticleLevelUp;
+
+	public double SECONDS;
 
     void Start()
     {
