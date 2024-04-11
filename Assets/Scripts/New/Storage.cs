@@ -26,7 +26,7 @@ public class Storage : MonoBehaviour
 
 	public float Fsize;
 
-    public RectTransform Canva;
+    public GameObject Canva;
 
     public GameObject   UpgradesMenu;
     public GameObject[] ClickUpgrades;
