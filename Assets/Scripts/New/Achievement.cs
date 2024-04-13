@@ -78,7 +78,7 @@ public class Achievement : MonoBehaviour
         }
         if (MultiplierPerClick)
         {
-            Storage.val_ach_MultiplierPerClick += bonus;
+            Storage.val_MultiplierPerClick += bonus;
         }
 
         Name.color = Color.yellow;

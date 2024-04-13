@@ -35,12 +35,16 @@ public class Upgrade : MonoBehaviour
     [Header("TYPE")]
     public bool Click;
     public bool Idle;
-    public bool Multiplier;
+    public bool MaxMultiplier;
+	public bool StepMultiplier;
 
-    public GameObject[] stars;
+	public GameObject[] stars;
 
     private int[] tab = { 1,10,25,50,100};
     private int changer = 0;
+
+
+
     void Start()
     {
         Storage = GameObject.Find("GameManager").GetComponent<Storage>();
@@ -116,7 +120,7 @@ public class Upgrade : MonoBehaviour
                     Storage.val_CashPerSec += Storage.IdleUpgrades[i].GetComponent<Upgrade>().UPGRADE_Bonus;
                 }
             }
-			if (Multiplier)
+			if (MaxMultiplier)
 			{
 				Storage.val_MaxMultiplier = 0;
 				for (int i = 0; i < Storage.IdleUpgrades.Length; i++)

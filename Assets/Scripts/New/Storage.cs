@@ -14,15 +14,15 @@ public class Storage : MonoBehaviour
     public double    val_MaxMultiplier;
     public float     val_MultiplierCooldown;
     public double    val_DynamicMultiplier;
+    public double    val_MultiplierPerClick;
 
-    public int       val_ProfileLevel;
+	public int       val_ProfileLevel;
     public double    val_ProfileExperienceToNextLvl;
 	public double    val_experience;
 
 
     public double    val_ach_experiencePerClick;
     public double    val_ach_StartMultiplier;
-    public double    val_ach_MultiplierPerClick;
 
 	public float Fsize;
 
@@ -32,7 +32,8 @@ public class Storage : MonoBehaviour
     public GameObject[] ClickUpgrades;
     public GameObject[] IdleUpgrades;
     public GameObject[] MultiplierUpgrades;
-    public GameObject[] Achievements;
+	public GameObject[] PrestigeUpgrades;
+	public GameObject[] Achievements;
     public GameObject   LIST_ClickUpgrades;
     public GameObject   LIST_IdleUpgrades;
     public GameObject   LIST_MultiplierUpgrades;

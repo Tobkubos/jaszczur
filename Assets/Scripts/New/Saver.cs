@@ -16,7 +16,9 @@ public class Saver : MonoBehaviour
                     { "CU_6_Level", "CU_6_Price", "CU_6_Bonus" },
                     { "CU_7_Level", "CU_7_Price", "CU_7_Bonus" },
                     { "CU_8_Level", "CU_8_Price", "CU_8_Bonus" },
-    };
+					{ "CU_9_Level", "CU_9_Price", "CU_9_Bonus" },
+					{ "CU_10_Level", "CU_10_Price", "C_10_Bonus" },
+	};
 
     string[,] IU ={ { "IU_1_Level", "IU_1_Price", "IU_1_Bonus" },
                     { "IU_2_Level", "IU_2_Price", "IU_2_Bonus" },
@@ -26,7 +28,33 @@ public class Saver : MonoBehaviour
                     { "IU_6_Level", "IU_6_Price", "IU_6_Bonus" },
                     { "IU_7_Level", "IU_7_Price", "IU_7_Bonus" },
                     { "IU_8_Level", "IU_8_Price", "IU_8_Bonus" },
-    };
+					{ "IU_9_Level", "IU_9_Price", "IU_9_Bonus" },
+					{ "IU_10_Level", "IU_10_Price", "IU_10_Bonus" },
+	};
+
+	string[,] MU ={ { "MU_1_Level", "MU_1_Price", "MU_1_Bonus" },
+					{ "MU_2_Level", "MU_2_Price", "MU_2_Bonus" },
+					{ "MU_3_Level", "MU_3_Price", "MU_3_Bonus" },
+					{ "MU_4_Level", "MU_4_Price", "MU_4_Bonus" },
+					{ "MU_5_Level", "MU_5_Price", "MU_5_Bonus" },
+					{ "MU_6_Level", "MU_6_Price", "MU_6_Bonus" },
+					{ "MU_7_Level", "MU_7_Price", "MU_7_Bonus" },
+					{ "MU_8_Level", "MU_8_Price", "MU_8_Bonus" },
+					{ "MU_9_Level", "MU_9_Price", "MU_9_Bonus" },
+					{ "MU_10_Level", "MU_10_Price", "MU_10_Bonus" },
+	};
+
+	string[,] PU ={ { "PU_1_Level", "PU_1_Price", "PU_1_Bonus" },
+					{ "PU_2_Level", "PU_2_Price", "PU_2_Bonus" },
+					{ "PU_3_Level", "PU_3_Price", "PU_3_Bonus" },
+					{ "PU_4_Level", "PU_4_Price", "PU_4_Bonus" },
+					{ "PU_5_Level", "PU_5_Price", "PU_5_Bonus" },
+					{ "PU_6_Level", "PU_6_Price", "PU_6_Bonus" },
+					{ "PU_7_Level", "PU_7_Price", "PU_7_Bonus" },
+					{ "PU_8_Level", "PU_8_Price", "PU_8_Bonus" },
+					{ "PU_9_Level", "PU_9_Price", "PU_9_Bonus" },
+					{ "PU_10_Level", "PU_10_Price", "pU_10_Bonus" },
+	};
 
 	public void SaveData()
     {
@@ -66,7 +94,7 @@ public class Saver : MonoBehaviour
 		for (int i = 0; i < Storage.IdleUpgrades.Length; i++)
 		{
 			Upgrade temp = Storage.IdleUpgrades[i].GetComponent<Upgrade>();
-			temp.UPGRADE_Level = PlayerPrefs.GetInt(CU[i, 0], 0);
+			temp.UPGRADE_Level = PlayerPrefs.GetInt(IU[i, 0], 0);
 			temp.UPGRADE_Price = double.Parse(PlayerPrefs.GetString(IU[i, 1], temp.START_Price.ToString()));
 			temp.UPGRADE_Bonus = double.Parse(PlayerPrefs.GetString(IU[i, 2], 0.ToString()));
 			Storage.val_CashPerSec += Storage.IdleUpgrades[i].GetComponent<Upgrade>().UPGRADE_Bonus;
@@ -75,9 +103,9 @@ public class Saver : MonoBehaviour
 		for (int i = 0; i < Storage.MultiplierUpgrades.Length; i++)
 		{
 			Upgrade temp = Storage.MultiplierUpgrades[i].GetComponent<Upgrade>();
-			temp.UPGRADE_Level = PlayerPrefs.GetInt(CU[i, 0], 0);
-			temp.UPGRADE_Price = double.Parse(PlayerPrefs.GetString(CU[i, 1], temp.START_Price.ToString()));
-			temp.UPGRADE_Bonus = double.Parse(PlayerPrefs.GetString(CU[i, 2], 0.ToString()));
+			temp.UPGRADE_Level = PlayerPrefs.GetInt(MU[i, 0], 0);
+			temp.UPGRADE_Price = double.Parse(PlayerPrefs.GetString(MU[i, 1], temp.START_Price.ToString()));
+			temp.UPGRADE_Bonus = double.Parse(PlayerPrefs.GetString(MU[i, 2], 0.ToString()));
 			Storage.val_MaxMultiplier += Storage.MultiplierUpgrades[i].GetComponent<Upgrade>().UPGRADE_Bonus;
 		}
 
@@ -118,10 +146,10 @@ public class Saver : MonoBehaviour
         LoadData();
 
         Storage.val_ach_experiencePerClick = 0;
-        Storage.val_ach_MultiplierPerClick = 0;
+        Storage.val_MultiplierPerClick = 0;
         Storage.val_ach_StartMultiplier = 0;
 
-        for(int i = 0; i<Storage.Achievements.Length; i++)
+		for (int i = 0; i<Storage.Achievements.Length; i++)
         {
             Storage.Achievements[i].GetComponent<Achievement>().collected = false;
         }
@@ -140,6 +168,11 @@ public class Saver : MonoBehaviour
 		{
 			Storage.MultiplierUpgrades[i].GetComponent<Upgrade>().CheckStars();
 		}
+
+
+		this.gameObject.GetComponent<UpgradeMenu>().EnableUpgrade(Storage.ClickUpgrades);
+		this.gameObject.GetComponent<UpgradeMenu>().EnableUpgrade(Storage.IdleUpgrades);
+		this.gameObject.GetComponent<UpgradeMenu>().EnableUpgrade(Storage.MultiplierUpgrades);
 	}
 
     public void KeyReset()
@@ -173,7 +206,16 @@ public class Saver : MonoBehaviour
 				PlayerPrefs.DeleteKey(IU[i, j]);
 			}
 		}
-        PlayerPrefs.DeleteKey("TotalCash");
+
+		for (int i = 0; i < MU.Length / 3; i++)
+		{
+			for (int j = 0; j < 3; j++)
+			{
+				PlayerPrefs.DeleteKey(IU[i, j]);
+			}
+		}
+
+		PlayerPrefs.DeleteKey("TotalCash");
 
 		LoadData();
 		Storage.val_Diamonds += 100;

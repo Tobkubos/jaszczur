@@ -1,13 +1,19 @@
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Advertisements;
+using TMPro;
 
 public class RewardedAdsButton : MonoBehaviour, IUnityAdsLoadListener, IUnityAdsShowListener
 {
+	public Storage Storage;
 	[SerializeField] Button _showAdButton;
 	[SerializeField] string _androidAdUnitId = "Rewarded_Android";
 	[SerializeField] string _iOSAdUnitId = "Rewarded_iOS";
 	string _adUnitId = null; // This will remain null for unsupported platforms
+
+	public GameObject RewardedAddBanner;
+	public TextMeshProUGUI TEXT_Reward;
+	double Bonus = 0;
 
 	void Awake()
 	{
@@ -28,6 +34,24 @@ public class RewardedAdsButton : MonoBehaviour, IUnityAdsLoadListener, IUnityAds
 		// IMPORTANT! Only load content AFTER initialization (in this example, initialization is handled in a different script).
 		Debug.Log("Loading Ad: " + _adUnitId);
 		Advertisement.Load(_adUnitId, this);
+		RewardedAddBanner.SetActive(true);
+		RewardedAddBanner.transform.localPosition = new Vector3(0, 0, 0);
+
+		if (Storage.val_CashPerSec > 0)
+		{
+			Bonus = Storage.val_CashPerSec * 2700;
+		}
+		else
+		{
+			Bonus = Storage.val_CashPerClick * 1000;
+		}
+		TEXT_Reward.text = Bonus.ToString();
+		Debug.Log("przed"+Bonus);
+	}
+
+	public void CloseBanner()
+	{
+		RewardedAddBanner.SetActive(false);
 	}
 
 	// If the ad successfully loads, add a listener to the button and enable it:
@@ -59,8 +83,12 @@ public class RewardedAdsButton : MonoBehaviour, IUnityAdsLoadListener, IUnityAds
 		if (adUnitId.Equals(_adUnitId) && showCompletionState.Equals(UnityAdsShowCompletionState.COMPLETED))
 		{
 			Debug.Log("Unity Ads Rewarded Ad Completed");
-			// Grant a reward.
+			Debug.Log("po" + Bonus);
+			Storage.val_TotalCash += Bonus;
+			Bonus = 0;
 		}
+
+		RewardedAddBanner.SetActive(false);
 	}
 
 	// Implement Load and Show Listener error callbacks:

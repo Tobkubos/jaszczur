@@ -13,6 +13,7 @@ public class UpgradeMenu : MonoBehaviour
         EnableUpgrade(Storage.ClickUpgrades);
         EnableUpgrade(Storage.IdleUpgrades);
         EnableUpgrade(Storage.MultiplierUpgrades);
+        EnableUpgrade(Storage.PrestigeUpgrades);
 
 		Storage.LIST_ClickUpgrades.SetActive(true);
 		Storage.LIST_IdleUpgrades.SetActive(false);

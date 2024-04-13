@@ -39,7 +39,7 @@ public class Click : MonoBehaviour
         if (DynMul == true && Storage.val_MultiplierCooldown > Time.time)
         {
             //
-            Storage.val_DynamicMultiplier += 0.01f + Storage.val_ach_MultiplierPerClick;
+            Storage.val_DynamicMultiplier += 0.01f + Storage.val_MultiplierPerClick;
             if (Storage.val_MultiplierCooldown < Time.time + 3)
             {
                 //
