@@ -19,35 +19,26 @@ public class InternetConnectionChecker : MonoBehaviour
 	{
 		StatusInfo2.text = "";
 		LeanTween.rotateAround(Icon, new Vector3(0, 0, 1), 360f, 0.5f).setLoopType(LeanTweenType.clamp).setRepeat(-1);
-		StartCoroutine(CheckStatusOnStart());
-	}
-	void Update()
-	{
-		// SprawdŸ stan po³¹czenia z Internetem
-		reachability = Application.internetReachability;
+		StartCoroutine(CheckStatusInterval());
+		float IconX = Icon.transform.localPosition.x;
+        float Status1X = Icon.transform.localPosition.x;
+        float Status2X = Icon.transform.localPosition.x;
+        float Status3X = StatusInfo3.transform.localPosition.x;
+    }
 
-		// SprawdŸ wynik i podejmij odpowiednie dzia³ania
-		switch (reachability)
+	IEnumerator CheckStatusInterval()
+	{
+		while (true)
 		{
-			case NetworkReachability.NotReachable:
-				Debug.Log("No Internet connection");
-				// Tutaj mo¿esz wyœwietliæ odpowiednie komunikaty dla gracza lub podj¹æ inne dzia³ania
-				break;
-			case NetworkReachability.ReachableViaCarrierDataNetwork:
-				Debug.Log("Connected to the Internet via mobile data network");
-				break;
-			case NetworkReachability.ReachableViaLocalAreaNetwork:
-				Debug.Log("Connected to the Internet via Wi-Fi network");
-				break;
+			yield return new WaitForSeconds(2f);
+			StartCoroutine(CheckStatus());
 		}
 	}
-
-
-	IEnumerator CheckStatusOnStart()
+	IEnumerator CheckStatus()
 	{
 		StatusBanner.SetActive(true);
 		StatusBanner.transform.localPosition = Vector3.zero;
-		yield return new WaitForSeconds(3f);
+		yield return new WaitForSeconds(2f);
 		reachability = Application.internetReachability;
 		switch (reachability)
 		{
@@ -63,17 +54,25 @@ public class InternetConnectionChecker : MonoBehaviour
 				status = "Connected to the Internet via Wi-Fi network";
 				break;
 		}
-		StatusInfo2.text = status;
-		yield return new WaitForSeconds(1f);
-		LeanTween.moveLocalX(Icon, -1000f, 1f);
-		LeanTween.moveLocalX(StatusInfo1.gameObject, 1000f, 1f).setDelay(0.2f);
-		LeanTween.moveLocalX(StatusInfo2.gameObject, -1000f, 1f).setDelay(0.4f);
-		LeanTween.moveLocalX(StatusInfo3.gameObject, 1000f, 1f).setDelay(0.4f);
-		LeanTween.value(StatusBanner, UpdateColorAlpha, 1f, 0f, 1f)
-		.setOnComplete(() => {
-		// Once the fade out is complete, deactivate the object
-		StatusBanner.SetActive(false);
-		});
+
+		if(status != "No Internet connection")
+		{
+            StatusInfo2.text = status;
+            yield return new WaitForSeconds(1f);
+            LeanTween.moveLocalX(Icon, -1000f, 1f);
+            LeanTween.moveLocalX(StatusInfo1.gameObject, 1000f, 0.5f).setDelay(0.2f);
+            LeanTween.moveLocalX(StatusInfo2.gameObject, -1000f, 0.5f).setDelay(0.4f);
+            LeanTween.moveLocalX(StatusInfo3.gameObject, 1000f, 0.5f).setDelay(0.4f);
+			LeanTween.value(StatusBanner, UpdateColorAlpha, 1f, 0f, 1f)
+			.setOnComplete(() => {
+				// Once the fade out is complete, deactivate the object
+				StatusBanner.SetActive(false);
+			});
+		}
+		else
+		{
+			StatusBanner.SetActive(true);
+		}
 	}
 
 	void UpdateColorAlpha(float alpha)

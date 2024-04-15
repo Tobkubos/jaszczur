@@ -49,7 +49,9 @@ public class RewardedAdsButton : MonoBehaviour, IUnityAdsLoadListener, IUnityAds
 		Debug.Log("przed"+Bonus);
 	}
 
-	public void CloseBanner()
+
+
+    public void CloseBanner()
 	{
 		RewardedAddBanner.SetActive(false);
 	}

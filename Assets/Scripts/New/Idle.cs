@@ -41,11 +41,9 @@ public class Idle : MonoBehaviour
 		Storage.OfflineIncomeBox.SetActive(false);
 	}
 
-	public void Collect2X()
-	{
-		//odpal reklame
-		Storage.TEXT_OfflineIncome.text = NumberConverter.FormatNumber(Storage.SECONDS * Storage.val_CashPerSec * 2f);
-		Storage.val_TotalCash += Storage.SECONDS * Storage.val_CashPerSec * 2;
-		Storage.OfflineIncomeBox.SetActive(false);
-	}
+    public void Collect2X()
+    {
+        Storage.val_TotalCash += Storage.SECONDS * (Storage.val_CashPerSec*2);
+        Storage.OfflineIncomeBox.SetActive(false);
+    }
 }

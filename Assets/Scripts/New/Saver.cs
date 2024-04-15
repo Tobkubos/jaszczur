@@ -65,6 +65,13 @@ public class Saver : MonoBehaviour
             PlayerPrefs.SetString(CU[i, 1], temp.UPGRADE_Price.ToString());
             PlayerPrefs.SetString(CU[i, 2], temp.UPGRADE_Bonus.ToString());
         }
+        for (int i = 0; i < Storage.IdleUpgrades.Length; i++)
+        {
+            Upgrade temp = Storage.IdleUpgrades[i].GetComponent<Upgrade>();
+            PlayerPrefs.SetInt(IU[i, 0], temp.UPGRADE_Level);
+            PlayerPrefs.SetString(IU[i, 1], temp.UPGRADE_Price.ToString());
+            PlayerPrefs.SetString(IU[i, 2], temp.UPGRADE_Bonus.ToString());
+        }
         PlayerPrefs.SetString("TotalCash", Storage.val_TotalCash.ToString());
 		PlayerPrefs.SetString("TotalDiamonds", Storage.val_Diamonds.ToString());
 		PlayerPrefs.SetString("Level", Storage.val_ProfileLevel.ToString());
@@ -117,7 +124,23 @@ public class Saver : MonoBehaviour
             TimeSpan TIME_BETWEEN = TIME_IN - TIME_OUT;
             Storage.SECONDS = TIME_BETWEEN.TotalSeconds;
             Storage.TEXT_OfflineIncome.text = NumberConverter.FormatNumber(Storage.SECONDS * Storage.val_CashPerSec);
-			Storage.TEXT_OfflineTime.text = $"{TIME_BETWEEN.Days} days\n {TIME_BETWEEN.Hours} hours\n {TIME_BETWEEN.Minutes} minutes\n {TIME_BETWEEN.Seconds} seconds";
+			if(TIME_BETWEEN.Days == 0)
+			{
+                Storage.TEXT_OfflineTime.text = $"{TIME_BETWEEN.Hours} hours\n {TIME_BETWEEN.Minutes} minutes\n {TIME_BETWEEN.Seconds} seconds";
+                if (TIME_BETWEEN.Hours == 0)
+				{
+                    Storage.TEXT_OfflineTime.text = $"{TIME_BETWEEN.Minutes} minutes\n {TIME_BETWEEN.Seconds} seconds";
+                    if (TIME_BETWEEN.Minutes == 0)
+					{
+                        Storage.TEXT_OfflineTime.text = $"{TIME_BETWEEN.Seconds} seconds";
+                    }
+				}
+            }
+			else
+			{
+                Storage.TEXT_OfflineTime.text = $"{TIME_BETWEEN.Days}days\n {TIME_BETWEEN.Hours} hours\n {TIME_BETWEEN.Minutes} minutes\n {TIME_BETWEEN.Seconds} seconds";
+            }
+
 		}
     }
 
@@ -132,6 +155,12 @@ public class Saver : MonoBehaviour
         if (pause)
         {
             SaveData();
+        }
+        if (!pause)
+        {
+            SaveData();
+			Debug.Log("ODPAUZOWANE");
+            Storage.OfflineIncomeBox.SetActive(true);
         }
     }
 
