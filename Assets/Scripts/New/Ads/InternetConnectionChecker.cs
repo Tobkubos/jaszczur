@@ -13,8 +13,20 @@ public class InternetConnectionChecker : MonoBehaviour
     public TextMeshProUGUI StatusInfo3;
     private string status;
 
+    // Zmienne do przechowywania pozycji pocz¹tkowych napisów
+    private Vector3 iconInitialPosition;
+    private Vector3 statusInfo1InitialPosition;
+    private Vector3 statusInfo2InitialPosition;
+    private Vector3 statusInfo3InitialPosition;
+
     private void Start()
     {
+        // Zapisz pozycje pocz¹tkowe napisów
+        iconInitialPosition = Icon.transform.localPosition;
+        statusInfo1InitialPosition = StatusInfo1.transform.localPosition;
+        statusInfo2InitialPosition = StatusInfo2.transform.localPosition;
+        statusInfo3InitialPosition = StatusInfo3.transform.localPosition;
+
         StatusInfo2.text = "";
         LeanTween.rotateAround(Icon, new Vector3(0, 0, 1), 360f, 0.5f).setLoopType(LeanTweenType.clamp).setRepeat(-1);
         StartCoroutine(CheckStatusInterval());
@@ -41,6 +53,15 @@ public class InternetConnectionChecker : MonoBehaviour
             case NetworkReachability.NotReachable:
                 status = "No Internet connection";
                 StatusBanner.SetActive(true); // Aktywuj StatusBanner tylko w przypadku braku po³¹czenia
+
+                // Przywróæ napisy na ich pierwotne pozycje
+                LeanTween.moveLocalY(Icon, iconInitialPosition.y, 0.5f).setEase(LeanTweenType.easeOutBack);
+                LeanTween.moveLocalY(StatusInfo1.gameObject, statusInfo1InitialPosition.y, 0.5f).setEase(LeanTweenType.easeOutBack).setDelay(0.2f);
+                LeanTween.moveLocalY(StatusInfo2.gameObject, statusInfo2InitialPosition.y, 0.5f).setEase(LeanTweenType.easeOutBack).setDelay(0.3f);
+                LeanTween.moveLocalY(StatusInfo3.gameObject, statusInfo3InitialPosition.y, 0.5f).setEase(LeanTweenType.easeOutBack).setDelay(0.1f);
+
+                // Ustaw kolor baneru na pocz¹tkowy
+                StatusBanner.GetComponent<Image>().color = new Color(0.32f, 0.32f, 0.32f, 1f);
                 break;
             case NetworkReachability.ReachableViaCarrierDataNetwork:
                 status = "Connected to the Internet via mobile data network";
@@ -55,13 +76,7 @@ public class InternetConnectionChecker : MonoBehaviour
         {
             if (StatusBanner.activeSelf)
             {
-                float tick = 1.2f;
-                LeanTween.moveLocalY(Icon, -1500f, tick).setEase(LeanTweenType.easeInBack);
-                LeanTween.moveLocalY(StatusInfo1.gameObject, -1500f, tick).setEase(LeanTweenType.easeInBack).setDelay(0.2f);
-                LeanTween.moveLocalY(StatusInfo2.gameObject, -1500f, tick).setEase(LeanTweenType.easeInBack).setDelay(0.3f);
-                LeanTween.moveLocalY(StatusInfo3.gameObject, -1500f, tick).setEase(LeanTweenType.easeInBack).setDelay(0.1f);
-                StatusBanner.GetComponent<Image>().color = new Color(0.14f, 0.14f, 0.14f, 1);
-
+                float tick = 0.8f;
                 yield return new WaitForSeconds(1f);
                 LeanTween.moveLocalY(Icon, 1500f, tick).setEase(LeanTweenType.easeInBack);
                 LeanTween.moveLocalY(StatusInfo1.gameObject, 1500f, tick).setEase(LeanTweenType.easeInBack).setDelay(0.2f);
@@ -70,7 +85,6 @@ public class InternetConnectionChecker : MonoBehaviour
                 LeanTween.value(StatusBanner, UpdateColorAlpha, 1f, 0f, 3f)
                 .setOnComplete(() =>
                 {
-                    // Once the fade out is complete, deactivate the object
                     StatusBanner.SetActive(false);
                 });
             }
