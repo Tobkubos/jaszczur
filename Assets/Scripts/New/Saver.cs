@@ -75,7 +75,7 @@ public class Saver : MonoBehaviour
 		PlayerPrefs.SetString("Level", Storage.val_ProfileLevel.ToString());
 		PlayerPrefs.SetString("Experience", Storage.val_experience.ToString());
 		PlayerPrefs.SetString("ExperienceToNextLevel", Storage.val_ProfileExperienceToNextLvl.ToString());
-		PlayerPrefs.SetString("Time_OUT", DateTime.Now.ToString()); 
+		//PlayerPrefs.SetString("Time_OUT", DateTime.Now.ToString()); 
     }
 	public void LoadData()
     {
