@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class InternetConnectionChecker : MonoBehaviour
 {
+    public DataInternetSaver DIS;
     NetworkReachability reachability;
     public GameObject StatusBanner;
     public GameObject Icon;
@@ -65,9 +66,11 @@ public class InternetConnectionChecker : MonoBehaviour
                 break;
             case NetworkReachability.ReachableViaCarrierDataNetwork:
                 status = "Connected to the Internet via mobile data network";
+                StartCoroutine(DIS.FetchDateTime());
                 break;
             case NetworkReachability.ReachableViaLocalAreaNetwork:
                 status = "Connected to the Internet via Wi-Fi network";
+                StartCoroutine(DIS.FetchDateTime());
                 break;
         }
         StatusInfo2.text = status;
