@@ -1,10 +1,12 @@
 using UnityEngine;
 using System;
+using System.Collections;
 
 public class Saver : MonoBehaviour
 {
     public Storage Storage;
     public NumberConverter NumberConverter;
+	public DataInternetSaver DataInternetSaver;
 
     string[,] CU ={ { "CU_1_Level", "CU_1_Price", "CU_1_Bonus" },
                     { "CU_2_Level", "CU_2_Price", "CU_2_Bonus" },
@@ -114,38 +116,44 @@ public class Saver : MonoBehaviour
 			Storage.val_MaxMultiplier += Storage.MultiplierUpgrades[i].GetComponent<Upgrade>().UPGRADE_Bonus;
 		}
 
-		//OFFLINE INCOME
-		DateTime TIME_OUT;
-        if (DateTime.TryParse(PlayerPrefs.GetString("Time_OUT", 0.ToString()), out TIME_OUT))
-        {
-            DateTime TIME_IN = DateTime.Now;
-            TimeSpan TIME_BETWEEN = TIME_IN - TIME_OUT;
-            Storage.SECONDS = TIME_BETWEEN.TotalSeconds;
-            Storage.TEXT_OfflineIncome.text = NumberConverter.FormatNumber(Storage.SECONDS * Storage.val_CashPerSec);
-			if(TIME_BETWEEN.Days == 0)
-			{
-                Storage.TEXT_OfflineTime.text = $"{TIME_BETWEEN.Hours} hours\n {TIME_BETWEEN.Minutes} minutes\n {TIME_BETWEEN.Seconds} seconds";
-                if (TIME_BETWEEN.Hours == 0)
-				{
-                    Storage.TEXT_OfflineTime.text = $"{TIME_BETWEEN.Minutes} minutes\n {TIME_BETWEEN.Seconds} seconds";
-                    if (TIME_BETWEEN.Minutes == 0)
-					{
-                        Storage.TEXT_OfflineTime.text = $"{TIME_BETWEEN.Seconds} seconds";
-                    }
-				}
-            }
-			else
-			{
-                Storage.TEXT_OfflineTime.text = $"{TIME_BETWEEN.Days}days\n {TIME_BETWEEN.Hours} hours\n {TIME_BETWEEN.Minutes} minutes\n {TIME_BETWEEN.Seconds} seconds";
-            }
-
-		}
     }
 
+	public void CalcOfflineIncome()
+	{
+		//OFFLINE INCOME
+		DateTime TIME_OUT;
+		if (DateTime.TryParse(PlayerPrefs.GetString("Time_OUT", 0.ToString()), out TIME_OUT))
+		{
+			DateTime TIME_IN;
+			if (DateTime.TryParse(PlayerPrefs.GetString("Time_IN", 0.ToString()), out TIME_IN))
+			{
+				TimeSpan TIME_BETWEEN = TIME_IN - TIME_OUT;
+				Storage.SECONDS = TIME_BETWEEN.TotalSeconds;
+				Storage.TEXT_OfflineIncome.text = NumberConverter.FormatNumber(Storage.SECONDS * Storage.val_CashPerSec);
+				if (TIME_BETWEEN.Days == 0)
+				{
+					Storage.TEXT_OfflineTime.text = $"{TIME_BETWEEN.Hours} hours\n {TIME_BETWEEN.Minutes} minutes\n {TIME_BETWEEN.Seconds} seconds";
+					if (TIME_BETWEEN.Hours == 0)
+					{
+						Storage.TEXT_OfflineTime.text = $"{TIME_BETWEEN.Minutes} minutes\n {TIME_BETWEEN.Seconds} seconds";
+						if (TIME_BETWEEN.Minutes == 0)
+						{
+							Storage.TEXT_OfflineTime.text = $"{TIME_BETWEEN.Seconds} seconds";
+						}
+					}
+				}
+				else
+				{
+					Storage.TEXT_OfflineTime.text = $"{TIME_BETWEEN.Days}days\n {TIME_BETWEEN.Hours} hours\n {TIME_BETWEEN.Minutes} minutes\n {TIME_BETWEEN.Seconds} seconds";
+				}
+			}
+		}
+	}
 
 
-    void Awake()
+	void Awake()
     {
+		StartCoroutine(DataInternetSaver.FetchDateTime(2));
         LoadData();
     }
     private void OnApplicationPause(bool pause)

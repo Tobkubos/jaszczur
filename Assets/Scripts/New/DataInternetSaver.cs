@@ -7,9 +7,9 @@ using UnityEngine.Networking;
 public class DataInternetSaver : MonoBehaviour
 {
     private const string WorldTimeAPIURL = "https://worldtimeapi.org/api/ip"; // Adres URL serwisu WorldTimeAPI
+    public Saver Saver;
 
-
-    public IEnumerator FetchDateTime()
+    public IEnumerator FetchDateTime(int ver)
     {
         using (UnityWebRequest www = UnityWebRequest.Get(WorldTimeAPIURL))
         {
@@ -32,9 +32,18 @@ public class DataInternetSaver : MonoBehaviour
                 int minutes = dateTime.Minute;
                 int seconds = dateTime.Second;
 
-                Debug.Log($"Rok: {years}, Miesi¹c: {months}, Dzieñ: {days}, Godzina: {hours}, Minuta: {minutes}, Sekunda: {seconds}");
-                PlayerPrefs.SetString("Time_OUT", dateTime.ToString());
-            }
+                if (ver == 1)
+                {
+                    Debug.Log("AKTUALNA: "+$"Rok: {years}, Miesi¹c: {months}, Dzieñ: {days}, Godzina: {hours}, Minuta: {minutes}, Sekunda: {seconds}");
+                    PlayerPrefs.SetString("Time_OUT", dateTime.ToString());
+                }
+				if (ver == 2)
+				{
+					Debug.Log("WCHODZI: "+$"Rok: {years}, Miesi¹c: {months}, Dzieñ: {days}, Godzina: {hours}, Minuta: {minutes}, Sekunda: {seconds}");
+					PlayerPrefs.SetString("Time_IN", dateTime.ToString());
+					Saver.CalcOfflineIncome();
+				}
+			}
         }
     }
 

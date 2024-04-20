@@ -66,11 +66,11 @@ public class InternetConnectionChecker : MonoBehaviour
                 break;
             case NetworkReachability.ReachableViaCarrierDataNetwork:
                 status = "Connected to the Internet via mobile data network";
-                StartCoroutine(DIS.FetchDateTime());
+                StartCoroutine(DIS.FetchDateTime(1));
                 break;
             case NetworkReachability.ReachableViaLocalAreaNetwork:
                 status = "Connected to the Internet via Wi-Fi network";
-                StartCoroutine(DIS.FetchDateTime());
+                StartCoroutine(DIS.FetchDateTime(1));
                 break;
         }
         StatusInfo2.text = status;
