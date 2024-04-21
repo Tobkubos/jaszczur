@@ -170,6 +170,20 @@ public class Saver : MonoBehaviour
         }
     }
 
+    private void OnApplicationFocus(bool pause)
+    {
+        if (pause)
+        {
+            SaveData();
+        }
+        if (!pause)
+        {
+            SaveData();
+            Debug.Log("ODPAUZOWANE");
+            Storage.OfflineIncomeBox.SetActive(true);
+        }
+    }
+
     private void OnApplicationQuit()
     {
         SaveData();

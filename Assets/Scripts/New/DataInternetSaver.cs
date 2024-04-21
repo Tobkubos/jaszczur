@@ -18,6 +18,7 @@ public class DataInternetSaver : MonoBehaviour
             if (www.result == UnityWebRequest.Result.ConnectionError || www.result == UnityWebRequest.Result.ProtocolError)
             {
                 Debug.LogError("B³¹d pobierania daty z serwera: " + www.error);
+                StartCoroutine(FetchDateTime(2));
             }
             else
             {

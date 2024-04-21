@@ -6,10 +6,11 @@ public class UpgradeMenu : MonoBehaviour
     public Storage Storage;
     private bool CanClick = true;
     private bool CLICKED = false;
-    private float move = 150f;
+    private GameObject canvas;
     private void Start()
     {
-        Storage.UpgradesMenu.transform.localPosition = new Vector3(0, -Storage.Canva.GetComponent<RectTransform>().rect.height + move, 0);
+        canvas = GameObject.FindWithTag("canvas");
+        Storage.UpgradesMenu.transform.localPosition = new Vector3(0, -canvas.GetComponent<RectTransform>().rect.height, 0);
         EnableUpgrade(Storage.ClickUpgrades);
         EnableUpgrade(Storage.IdleUpgrades);
         EnableUpgrade(Storage.MultiplierUpgrades);
@@ -19,10 +20,12 @@ public class UpgradeMenu : MonoBehaviour
 		Storage.LIST_IdleUpgrades.SetActive(false);
 		Storage.LIST_MultiplierUpgrades.SetActive(false);
 		Storage.LIST_OtherUpgrades.SetActive(false);
+        Storage.PrestigeBox.SetActive(false);
 	}
 
     private void Update()
     {
+        canvas = GameObject.FindWithTag("canvas");
         CheckForUpgrade(Storage.ClickUpgrades);
         CheckForUpgrade(Storage.IdleUpgrades);
         CheckForUpgrade(Storage.MultiplierUpgrades);
@@ -37,14 +40,13 @@ public class UpgradeMenu : MonoBehaviour
             {
                 CLICKED = true;
                 StartCoroutine(Cooldown());
-                LeanTween.moveLocalY(Storage.UpgradesMenu, -Storage.Canva.GetComponent<RectTransform>().rect.height / 3 - move, 0.5f).setEase(LeanTweenType.easeInOutSine);
+                LeanTween.moveLocalY(Storage.UpgradesMenu, -canvas.GetComponent<RectTransform>().rect.height / 3, 0.5f).setEase(LeanTweenType.easeInOutSine);
             }
             else if (CLICKED == true)
             {
                 CLICKED = false;
                 StartCoroutine(Cooldown());
-                LeanTween.moveLocalY(Storage.UpgradesMenu, -Storage.Canva.GetComponent<RectTransform>().rect.height + move, 0.5f).setEase(LeanTweenType.easeInOutSine);
-                
+                LeanTween.moveLocalY(Storage.UpgradesMenu, -canvas.GetComponent<RectTransform>().rect.height, 0.5f).setEase(LeanTweenType.easeInOutSine);
             }
         }
     }
@@ -53,12 +55,27 @@ public class UpgradeMenu : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
         CanClick = true;
     }
+
+    public void UpgradeMenuClicked()
+    {
+        Storage.PrestigeBox.SetActive(false);
+        Storage.ALLUpgradeButtons.SetActive(true);
+        ShowClickUpgrades();
+    }
+
+    public void PrestigeBoxClicked()
+    {
+        Storage.ALLUpgradeButtons.SetActive(false);
+        ShowPrestigeBox();
+    }
+
     public void ShowClickUpgrades()
     {
         Storage.LIST_ClickUpgrades.SetActive(true);
         Storage.LIST_IdleUpgrades.SetActive(false);
         Storage.LIST_MultiplierUpgrades.SetActive(false);
         Storage.LIST_OtherUpgrades.SetActive(false);
+        Storage.PrestigeBox.SetActive(false);
     }
     public void ShowIdleUpgrades()
     {
@@ -66,6 +83,7 @@ public class UpgradeMenu : MonoBehaviour
         Storage.LIST_IdleUpgrades.SetActive(true);
         Storage.LIST_MultiplierUpgrades.SetActive(false);
         Storage.LIST_OtherUpgrades.SetActive(false);
+        Storage.PrestigeBox.SetActive(false);
     }
     public void ShowMultiplierUpgrades()
     {
@@ -73,6 +91,7 @@ public class UpgradeMenu : MonoBehaviour
         Storage.LIST_IdleUpgrades.SetActive(false);
         Storage.LIST_MultiplierUpgrades.SetActive(true);
         Storage.LIST_OtherUpgrades.SetActive(false);
+        Storage.PrestigeBox.SetActive(false);
     }
     public void ShowOtherUpgrades()
     {
@@ -80,6 +99,16 @@ public class UpgradeMenu : MonoBehaviour
         Storage.LIST_IdleUpgrades.SetActive(false);
         Storage.LIST_MultiplierUpgrades.SetActive(false);
         Storage.LIST_OtherUpgrades.SetActive(true);
+        Storage.PrestigeBox.SetActive(false);
+    }
+
+    public void ShowPrestigeBox()
+    {
+        Storage.LIST_ClickUpgrades.SetActive(false);
+        Storage.LIST_IdleUpgrades.SetActive(false);
+        Storage.LIST_MultiplierUpgrades.SetActive(false);
+        Storage.LIST_OtherUpgrades.SetActive(false);
+        Storage.PrestigeBox.SetActive(true);
     }
     private void CheckForUpgrade(GameObject[] tab)
     {
