@@ -105,7 +105,7 @@ public class Upgrade : MonoBehaviour
                 UPGRADE_Level += 1;
                 CheckStars();
                 Prestige.Calculate();
-                PlayerPrefs.SetString("PrestigeBonus", Storage.val_PrestigeBonus.ToString());
+
             }
             if (Click)
             {
