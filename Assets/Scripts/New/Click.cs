@@ -1,3 +1,6 @@
+using System;
+using System.Collections;
+using TMPro;
 using UnityEngine;
 
 public class Click : MonoBehaviour
@@ -7,6 +10,8 @@ public class Click : MonoBehaviour
     private bool DynMul = false;
     private float normalizedTime;
     public float Cooldown = 10;
+    int clicks = 0;
+    public TextMeshProUGUI CPSTXT;
 
     private void FixedUpdate()
     {
@@ -22,9 +27,14 @@ public class Click : MonoBehaviour
         Storage.Slider.value = normalizedTime;
         Storage.TEXT_Multiplier.text = "x" + NumberConverter.FormatNumberFloat(Storage.val_DynamicMultiplier);
 
-
+        CPSTXT.text = "CPS: " + clicks + " /s";
     }
 
+    private IEnumerator ClickMinus()
+    {
+        yield return new WaitForSeconds(1);
+        clicks--;
+    }
     public void FUNCTION_Click()
     {
         Cooldown = Time.time + 5;
@@ -50,24 +60,32 @@ public class Click : MonoBehaviour
             }
         }
 
-        //
+
+        //CPS
+        clicks++;
+        StartCoroutine(ClickMinus());
+        
+
+        // DODANIE KASY
         Storage.val_TotalCash += Storage.val_CashPerClick * Storage.val_DynamicMultiplier;
         Storage.val_experience += 1 + Storage.val_ach_experiencePerClick;
 		Storage.ParticleClick.Play();
 		//
 
-		int tempDiamond = Random.Range(0, 100);
+        //SZANSA NA TOILETA!
+		int tempDiamond = UnityEngine.Random.Range(0, 100);
         if (tempDiamond <= Storage.val_DiamondsChance)
         {
             Storage.val_Diamonds += 1;
             Storage.TEXT_Diamonds.text = Storage.val_Diamonds.ToString();
         }
 
+        //ANIMACJA
         Storage.ClickObject.transform.localScale = new Vector3(1, 1, 1);
         LeanTween.scale(Storage.ClickObject, new Vector3(1.1f, 1.1f, 1.1f), 0.05f);
         LeanTween.scale(Storage.ClickObject, new Vector3(1f, 1f, 1f), 0.05f).setDelay(0.05f);
 
-        int temp = Random.Range(0, 2);
+        int temp = UnityEngine.Random.Range(0, 2);
         if (temp == 0)
         {
             LeanTween.rotate(Storage.ClickObject, new Vector3(0, 0, 5), 0.05f);

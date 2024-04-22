@@ -21,7 +21,14 @@ public class Idle : MonoBehaviour
 		FirstStart = PlayerPrefs.GetInt("FirstStart", 1);
 		if (FirstStart == 0)
 		{
-			Storage.OfflineIncomeBox.SetActive(true);
+			if (Storage.val_CashPerSec != 0)
+			{
+				Storage.OfflineIncomeBox.SetActive(true);
+			}
+			else
+			{
+                Storage.OfflineIncomeBox.SetActive(false);
+            }
 		}
 
 		if (FirstStart == 1)

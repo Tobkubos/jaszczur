@@ -21,6 +21,8 @@ public class UpgradeMenu : MonoBehaviour
 		Storage.LIST_MultiplierUpgrades.SetActive(false);
 		Storage.LIST_OtherUpgrades.SetActive(false);
         Storage.PrestigeBox.SetActive(false);
+
+        
 	}
 
     private void Update()
@@ -38,17 +40,27 @@ public class UpgradeMenu : MonoBehaviour
 
             if (CLICKED == false)
             {
-                CLICKED = true;
-                StartCoroutine(Cooldown());
-                LeanTween.moveLocalY(Storage.UpgradesMenu, -canvas.GetComponent<RectTransform>().rect.height / 3, 0.5f).setEase(LeanTweenType.easeInOutSine);
+                Show();
             }
             else if (CLICKED == true)
             {
-                CLICKED = false;
-                StartCoroutine(Cooldown());
-                LeanTween.moveLocalY(Storage.UpgradesMenu, -canvas.GetComponent<RectTransform>().rect.height, 0.5f).setEase(LeanTweenType.easeInOutSine);
+                Close();
             }
         }
+    }
+
+    public void Show()
+    {
+        CLICKED = true;
+        StartCoroutine(Cooldown());
+        LeanTween.moveLocalY(Storage.UpgradesMenu, -canvas.GetComponent<RectTransform>().rect.height / 3, 0.5f).setEase(LeanTweenType.easeInOutSine);
+    }
+
+    public void Close()
+    {
+        CLICKED = false;
+        StartCoroutine(Cooldown());
+        LeanTween.moveLocalY(Storage.UpgradesMenu, -canvas.GetComponent<RectTransform>().rect.height, 0.5f).setEase(LeanTweenType.easeInOutSine);
     }
     IEnumerator Cooldown()
     {

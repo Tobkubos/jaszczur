@@ -31,6 +31,9 @@ public class RewardedAdsIdle : MonoBehaviour, IUnityAdsLoadListener, IUnityAdsSh
         // WA¯NE! £aduj zawartoœæ TYLKO PO inicjalizacji (w tym przyk³adzie, inicjalizacja jest obs³ugiwana w innym skrypcie).
         Debug.Log("£adowanie reklamy: " + _adUnitId);
         Advertisement.Load(_adUnitId, this);
+        OnUnityAdsAdLoaded(_adUnitId);
+        ShowAd();
+
     }
 
     // Jeœli reklama zostanie pomyœlnie za³adowana, dodaj nas³uchiwacz do przycisku i w³¹cz go:

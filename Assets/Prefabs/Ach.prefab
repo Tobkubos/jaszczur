@@ -67,8 +67,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: +666 exp for every click
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: a59c56e1fd2f24348a27b9875e839a98, type: 2}
-  m_sharedMaterial: {fileID: 66841297707217846, guid: a59c56e1fd2f24348a27b9875e839a98, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 035eb8c2fc912534d91f423cfe30315d, type: 2}
+  m_sharedMaterial: {fileID: 3062299475159135655, guid: 035eb8c2fc912534d91f423cfe30315d, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -226,16 +226,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08bf418686ea87f4cacc0255bfe085aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Storage: {fileID: 0}
   StartMultiplier: 0
   ExpPerClick: 0
   MultiplierPerClick: 0
   DiamondPercentage: 0
   bonus: 0
+  LevelAchievement: 0
+  levelToAchieve: 0
+  collected: 0
   Name: {fileID: 157470006791601041}
   Desc: {fileID: 5688599139231289837}
   button: {fileID: 3212103009865018809}
   divider: {fileID: 8620153678053528641}
+  achSaveName: 
 --- !u!1 &3212103009865018809
 GameObject:
   m_ObjectHideFlags: 0
@@ -436,8 +439,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'Buy the: ESCAPE FROM OHIO upgrade'
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: a59c56e1fd2f24348a27b9875e839a98, type: 2}
-  m_sharedMaterial: {fileID: 66841297707217846, guid: a59c56e1fd2f24348a27b9875e839a98, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 035eb8c2fc912534d91f423cfe30315d, type: 2}
+  m_sharedMaterial: {fileID: 3062299475159135655, guid: 035eb8c2fc912534d91f423cfe30315d, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -461,7 +464,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 35.85
+  m_fontSize: 46.05
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1

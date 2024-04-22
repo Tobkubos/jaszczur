@@ -8,7 +8,6 @@ public class DataInternetSaver : MonoBehaviour
 {
     private const string WorldTimeAPIURL = "https://worldtimeapi.org/api/ip"; // Adres URL serwisu WorldTimeAPI
     public Saver Saver;
-
     public IEnumerator FetchDateTime(int ver)
     {
         using (UnityWebRequest www = UnityWebRequest.Get(WorldTimeAPIURL))

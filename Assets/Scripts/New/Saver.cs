@@ -7,6 +7,7 @@ public class Saver : MonoBehaviour
     public Storage Storage;
     public NumberConverter NumberConverter;
 	public DataInternetSaver DataInternetSaver;
+	public UpgradeMenu UpgradeMenu;
 
     string[,] CU ={ { "CU_1_Level", "CU_1_Price", "CU_1_Bonus" },
                     { "CU_2_Level", "CU_2_Price", "CU_2_Bonus" },
@@ -128,6 +129,7 @@ public class Saver : MonoBehaviour
 			if (DateTime.TryParse(PlayerPrefs.GetString("Time_IN", 0.ToString()), out TIME_IN))
 			{
 				TimeSpan TIME_BETWEEN = TIME_IN - TIME_OUT;
+				if (TIME_BETWEEN.TotalSeconds <= 0) TIME_BETWEEN = TimeSpan.Zero;
 				Storage.SECONDS = TIME_BETWEEN.TotalSeconds;
 				Storage.TEXT_OfflineIncome.text = NumberConverter.FormatNumber(Storage.SECONDS * Storage.val_CashPerSec);
 				if (TIME_BETWEEN.Days == 0)
@@ -226,20 +228,8 @@ public class Saver : MonoBehaviour
 
     public void KeyReset()
     {
-        
-        /*
-		PlayerPrefs.SetString("TotalDiamonds", Storage.val_Diamonds.ToString());
-		PlayerPrefs.SetString("Level", Storage.val_ProfileLevel.ToString());
-		PlayerPrefs.SetString("Experience", Storage.val_experience.ToString());
-		PlayerPrefs.SetString("ExperienceToNextLevel", Storage.val_ProfileExperienceToNextLvl.ToString());
-
-		double temp =  double.Parse(PlayerPrefs.GetString("TotalDiamonds", 0.ToString()));
-		int temp1 = int.Parse(PlayerPrefs.GetString("Level", 0.ToString()));
-		double temp2 = double.Parse(PlayerPrefs.GetString("Experience", 0.ToString()));
-		double temp3 = double.Parse(PlayerPrefs.GetString("ExperienceToNextLevel", 10.ToString()));
-        */
-
-        //PlayerPrefs.DeleteAll();
+		UpgradeMenu.Close();
+   
         for(int i =0; i < CU.Length/3; i++)
         {
             for (int j = 0; j < 3; j++)
@@ -267,14 +257,9 @@ public class Saver : MonoBehaviour
 		PlayerPrefs.DeleteKey("TotalCash");
 
 		LoadData();
-		Storage.val_Diamonds += 100;
+		Storage.val_Diamonds += 100; // TODO ALGORYTM WYLICZANIA KIBLI
         SaveData();
-		/*
-        Storage.val_Diamonds = temp;
-        Storage.val_ProfileLevel = temp1;
-		Storage.val_experience = temp2;
-		Storage.val_ProfileExperienceToNextLvl = temp3;
-        */
+
 		this.gameObject.GetComponent<UpgradeMenu>().EnableUpgrade(Storage.ClickUpgrades);
 		this.gameObject.GetComponent<UpgradeMenu>().EnableUpgrade(Storage.IdleUpgrades);
 		this.gameObject.GetComponent<UpgradeMenu>().EnableUpgrade(Storage.MultiplierUpgrades);
