@@ -75,7 +75,8 @@ public class Saver : MonoBehaviour
         }
         PlayerPrefs.SetString("TotalCash", Storage.val_TotalCash.ToString());
 		PlayerPrefs.SetString("TotalDiamonds", Storage.val_Diamonds.ToString());
-		PlayerPrefs.SetString("Level", Storage.val_ProfileLevel.ToString());
+        PlayerPrefs.SetString("PrestigeBonus", Storage.val_PrestigeBonus.ToString());
+        PlayerPrefs.SetString("Level", Storage.val_ProfileLevel.ToString());
 		PlayerPrefs.SetString("Experience", Storage.val_experience.ToString());
 		PlayerPrefs.SetString("ExperienceToNextLevel", Storage.val_ProfileExperienceToNextLvl.ToString());
 		//PlayerPrefs.SetString("Time_OUT", DateTime.Now.ToString()); 
@@ -84,7 +85,8 @@ public class Saver : MonoBehaviour
     {
         Storage.val_TotalCash =                  double.Parse(PlayerPrefs.GetString("TotalCash", 0.ToString()));
         Storage.val_Diamonds =                   double.Parse(PlayerPrefs.GetString("TotalDiamonds", 0.ToString()));
-		Storage.val_ProfileLevel =               int.Parse(PlayerPrefs.GetString("Level", 0.ToString()));
+        Storage.val_PrestigeBonus =				 double.Parse(PlayerPrefs.GetString("PrestigeBonus", 0.ToString()));
+        Storage.val_ProfileLevel =               int.Parse(PlayerPrefs.GetString("Level", 0.ToString()));
         Storage.val_experience =                 double.Parse(PlayerPrefs.GetString("Experience", 0.ToString()));
 		Storage.val_ProfileExperienceToNextLvl = double.Parse(PlayerPrefs.GetString("ExperienceToNextLevel", 10.ToString()));
 		Storage.val_CashPerClick = 1;
@@ -256,8 +258,10 @@ public class Saver : MonoBehaviour
 
 		PlayerPrefs.DeleteKey("TotalCash");
 
-		LoadData();
-		Storage.val_Diamonds += 100; // TODO ALGORYTM WYLICZANIA KIBLI
+
+        LoadData();
+		Storage.val_Diamonds += Storage.val_PrestigeBonus;
+		Storage.val_PrestigeBonus = 0;
         SaveData();
 
 		this.gameObject.GetComponent<UpgradeMenu>().EnableUpgrade(Storage.ClickUpgrades);

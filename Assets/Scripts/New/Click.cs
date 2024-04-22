@@ -12,6 +12,7 @@ public class Click : MonoBehaviour
     public float Cooldown = 10;
     int clicks = 0;
     public TextMeshProUGUI CPSTXT;
+    public ParticleSystem GigaParticleCPS;
 
     private void FixedUpdate()
     {
@@ -28,6 +29,15 @@ public class Click : MonoBehaviour
         Storage.TEXT_Multiplier.text = "x" + NumberConverter.FormatNumberFloat(Storage.val_DynamicMultiplier);
 
         CPSTXT.text = "CPS: " + clicks + " /s";
+
+        if(clicks >= 10)
+        {
+            GigaParticleCPS.Play();
+        }
+        else
+        {
+            GigaParticleCPS.Stop();
+        }
     }
 
     private IEnumerator ClickMinus()
@@ -77,6 +87,7 @@ public class Click : MonoBehaviour
         if (tempDiamond <= Storage.val_DiamondsChance)
         {
             Storage.val_Diamonds += 1;
+            PlayerPrefs.SetString("TotalDiamonds", Storage.val_Diamonds.ToString());
             Storage.TEXT_Diamonds.text = Storage.val_Diamonds.ToString();
         }
 

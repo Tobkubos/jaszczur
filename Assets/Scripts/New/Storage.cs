@@ -24,6 +24,8 @@ public class Storage : MonoBehaviour
     public double    val_ach_experiencePerClick;
     public double    val_ach_StartMultiplier;
 
+    public double    val_PrestigeBonus;
+
 	public float Fsize;
 
     public GameObject   UpgradesMenu;
@@ -58,7 +60,9 @@ public class Storage : MonoBehaviour
     public TextMeshProUGUI TEXT_OfflineIncome;
 	public TextMeshProUGUI TEXT_OfflineTime;
 
-	public NumberConverter NumberConverter;
+    public TextMeshProUGUI TEXT_Prestige;
+
+    public NumberConverter NumberConverter;
 
     public ParticleSystem ParticleClick;
 	public ParticleSystem ParticleLevelUp;

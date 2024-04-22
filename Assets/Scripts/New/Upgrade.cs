@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class Upgrade : MonoBehaviour
 {
     Storage Storage;
+    Prestige Prestige;
     NumberConverter NumberConverter;
 
     public GameObject BUTTON_Buy;
@@ -47,6 +48,7 @@ public class Upgrade : MonoBehaviour
     void Start()
     {
         Storage = GameObject.Find("GameManager").GetComponent<Storage>();
+        Prestige = GameObject.Find("GameManager").GetComponent<Prestige>();
 
 
         if (UPGRADE_Level == 0) UPGRADE_Price = START_Price;
@@ -102,6 +104,8 @@ public class Upgrade : MonoBehaviour
                 UPGRADE_Price *= UPGRADE_PriceChange;
                 UPGRADE_Level += 1;
                 CheckStars();
+                Prestige.Calculate();
+                PlayerPrefs.SetString("PrestigeBonus", Storage.val_PrestigeBonus.ToString());
             }
             if (Click)
             {
